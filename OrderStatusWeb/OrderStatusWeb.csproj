@@ -1,0 +1,385 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{295F812E-A9B0-4EEC-9500-49C4CF6D7A9E}</ProjectGuid>
+    <ProjectTypeGuids>{F85E285D-A4E0-4152-9332-AB1D724D3325};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OrderStatusWeb</RootNamespace>
+    <AssemblyName>OrderStatusWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=6.4.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data.CF, Version=6.4.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data.Entity, Version=6.4.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Web, Version=6.4.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EODController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\StoreController.cs" />
+    <Compile Include="DataAttributes\AuthorizationAttribute.cs" />
+    <Compile Include="DataAttributes\StoreAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HtmlHelpers\UrlHelperExtension.cs" />
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\OrderModels.cs" />
+    <Compile Include="Models\StoreModels.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\RegularExpressions.cs" />
+    <Compile Include="Web References\3dApi\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\Common\style.css" />
+    <Content Include="css\css\datePicker.css" />
+    <Content Include="css\css\pro_dropline.css" />
+    <Content Include="css\css\pro_dropline_ie.css" />
+    <Content Include="css\css\screen.css" />
+    <Content Include="css\images\forms\bg_related_act.gif" />
+    <Content Include="css\images\forms\bubble_inner.gif" />
+    <Content Include="css\images\forms\bubble_left.gif" />
+    <Content Include="css\images\forms\bubble_right.gif" />
+    <Content Include="css\images\forms\choose-file.gif" />
+    <Content Include="css\images\forms\error_left.gif" />
+    <Content Include="css\images\forms\error_right.gif" />
+    <Content Include="css\images\forms\form_inp.gif" />
+    <Content Include="css\images\forms\form_inp_error.gif" />
+    <Content Include="css\images\forms\form_reset.gif" />
+    <Content Include="css\images\forms\form_select.gif" />
+    <Content Include="css\images\forms\form_select_small.gif" />
+    <Content Include="css\images\forms\form_submit.gif" />
+    <Content Include="css\images\forms\form_textarea.gif" />
+    <Content Include="css\images\forms\header_related_act.gif" />
+    <Content Include="css\images\forms\icon_calendar.jpg" />
+    <Content Include="css\images\forms\icon_edit.gif" />
+    <Content Include="css\images\forms\icon_list_arrow.gif" />
+    <Content Include="css\images\forms\icon_minus.gif" />
+    <Content Include="css\images\forms\icon_plus.gif" />
+    <Content Include="css\images\forms\lines_dotted_short.gif" />
+    <Content Include="css\images\forms\step_1.gif" />
+    <Content Include="css\images\forms\step_dark_left.gif" />
+    <Content Include="css\images\forms\step_dark_right.gif" />
+    <Content Include="css\images\forms\step_dark_round.gif" />
+    <Content Include="css\images\forms\step_light_left.gif" />
+    <Content Include="css\images\forms\step_light_right.gif" />
+    <Content Include="css\images\forms\step_light_round.gif" />
+    <Content Include="css\images\forms\upload_file.gif" />
+    <Content Include="css\images\login\icon_back_login.gif" />
+    <Content Include="css\images\login\inp_login.gif" />
+    <Content Include="css\images\login\loginbox_bg.png" />
+    <Content Include="css\images\login\login_bg.jpg" />
+    <Content Include="css\images\login\submit_login.gif" />
+    <Content Include="css\images\shared\blank.gif" />
+    <Content Include="css\images\shared\border_bit.jpg" />
+    <Content Include="css\images\shared\cal_th_repeat.jpg" />
+    <Content Include="css\images\shared\cal_top_bg.jpg" />
+    <Content Include="css\images\shared\cal_top_repeat.jpg" />
+    <Content Include="css\images\shared\checkbox.gif" />
+    <Content Include="css\images\shared\content_repeat.jpg" />
+    <Content Include="css\images\shared\corner_bottom_left.jpg" />
+    <Content Include="css\images\shared\corner_bottom_right.jpg" />
+    <Content Include="css\images\shared\corner_top_left.jpg" />
+    <Content Include="css\images\shared\corner_top_right.jpg" />
+    <Content Include="css\images\shared\icon_Hlogo.jpg" />
+    <Content Include="css\images\shared\logo.png" />
+    <Content Include="css\images\shared\nav\account_drop_bg.gif" />
+    <Content Include="css\images\shared\nav\account_line.gif" />
+    <Content Include="css\images\shared\nav\back_0.gif" />
+    <Content Include="css\images\shared\nav\back_1x.gif" />
+    <Content Include="css\images\shared\nav\Copy of pro_line_1.gif" />
+    <Content Include="css\images\shared\nav\divider.jpg" />
+    <Content Include="css\images\shared\nav\icon_acc_inbox.gif" />
+    <Content Include="css\images\shared\nav\icon_acc_personal.gif" />
+    <Content Include="css\images\shared\nav\icon_acc_projects.gif" />
+    <Content Include="css\images\shared\nav\icon_acc_settings.gif" />
+    <Content Include="css\images\shared\nav\icon_acc_stats.gif" />
+    <Content Include="css\images\shared\nav\nav_logout.gif" />
+    <Content Include="css\images\shared\nav\nav_myaccount.gif" />
+    <Content Include="css\images\shared\nav\pro_line_0x.gif" />
+    <Content Include="css\images\shared\nav\pro_line_1.gif" />
+    <Content Include="css\images\shared\nav\pro_line_2.gif" />
+    <Content Include="css\images\shared\nav\repeat.jpg" />
+    <Content Include="css\images\shared\side_shadowleft.jpg" />
+    <Content Include="css\images\shared\side_shadowright.jpg" />
+    <Content Include="css\images\shared\top_bg.jpg" />
+    <Content Include="css\images\shared\top_search_btn.gif" />
+    <Content Include="css\images\shared\top_search_inp.gif" />
+    <Content Include="css\images\shared\top_search_select.gif" />
+    <Content Include="css\images\shared\year_next.gif" />
+    <Content Include="css\images\shared\year_prev.gif" />
+    <Content Include="css\images\table\actions_slider_bg.gif" />
+    <Content Include="css\images\table\action_delete.gif" />
+    <Content Include="css\images\table\action_edit.gif" />
+    <Content Include="css\images\table\AddStore.png" />
+    <Content Include="css\images\table\content_round_repeat.jpg" />
+    <Content Include="css\images\table\content_round_top.jpg" />
+    <Content Include="css\images\table\dropdown_actions.gif" />
+    <Content Include="css\images\table\icon_close_blue.gif" />
+    <Content Include="css\images\table\icon_close_green.gif" />
+    <Content Include="css\images\table\icon_close_red.gif" />
+    <Content Include="css\images\table\icon_close_yellow.gif" />
+    <Content Include="css\images\table\message_blue.gif" />
+    <Content Include="css\images\table\message_green.gif" />
+    <Content Include="css\images\table\message_red.gif" />
+    <Content Include="css\images\table\message_yellow.gif" />
+    <Content Include="css\images\table\paging_far_left.gif" />
+    <Content Include="css\images\table\paging_far_right.gif" />
+    <Content Include="css\images\table\paging_left.gif" />
+    <Content Include="css\images\table\paging_right.gif" />
+    <Content Include="css\images\table\select_number_rows.gif" />
+    <Content Include="css\images\table\table_header.jpg" />
+    <Content Include="css\images\table\table_header_checkbox.jpg" />
+    <Content Include="css\images\table\table_header_options.jpg" />
+    <Content Include="css\images\table\table_header_repeat.jpg" />
+    <Content Include="css\images\table\table_icon_1.gif" />
+    <Content Include="css\images\table\table_icon_2.gif" />
+    <Content Include="css\images\table\table_icon_3.gif" />
+    <Content Include="css\images\table\table_icon_4.gif" />
+    <Content Include="css\images\table\table_icon_5.gif" />
+    <Content Include="css\images\table\table_sort_arrow.gif" />
+    <Content Include="css\Store\Store.css" />
+    <Content Include="Global.asax" />
+    <None Include="ClassDiagram1.cd" />
+    <Content Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Images\delete.png" />
+    <Content Include="Images\ico-pencil.png" />
+    <Content Include="Images\stop.png" />
+    <Content Include="Scripts\common\knockout-2.0.0.js" />
+    <Content Include="Scripts\common\knockout.mapping.js" />
+    <Content Include="Scripts\common\script.js" />
+    <Content Include="Scripts\EOD\index.js" />
+    <Content Include="Scripts\jqueryUI\css\custom-theme\images\ui-bg_diagonal-maze_0_5a5a5a_10x10.png" />
+    <Content Include="Scripts\jqueryUI\css\custom-theme\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Scripts\jqueryUI\css\custom-theme\images\ui-bg_flat_100_94b52c_40x100.png" />
+    <Content Include="Scripts\jqueryUI\css\custom-theme\images\ui-bg_flat_65_94b52c_40x100.png" />
+    <Content Include="Scripts\jqueryUI\css\custom-theme\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Scripts\jqueryUI\css\custom-theme\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Scripts\jqueryUI\css\custom-theme\images\ui-bg_glass_75_94b52c_1x400.png" />
+    <Content Include="Scripts\jqueryUI\css\custom-theme\images\ui-bg_highlight-soft_100_5a5a5a_1x100.png" />
+    <Content Include="Scripts\jqueryUI\css\custom-theme\images\ui-bg_inset-soft_95_fef1ec_1x100.png" />
+    <Content Include="Scripts\jqueryUI\css\custom-theme\images\ui-icons_222222_256x240.png" />
+    <Content Include="Scripts\jqueryUI\css\custom-theme\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Scripts\jqueryUI\css\custom-theme\images\ui-icons_454545_256x240.png" />
+    <Content Include="Scripts\jqueryUI\css\custom-theme\images\ui-icons_888888_256x240.png" />
+    <Content Include="Scripts\jqueryUI\css\custom-theme\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Scripts\jqueryUI\css\custom-theme\jquery-ui-1.8.18.custom.css" />
+    <Content Include="Scripts\jqueryUI\js\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\jqueryUI\js\jquery-ui-1.8.18.custom.min.js" />
+    <Content Include="Scripts\js\jquery\Copy of custom_jquery.js" />
+    <Content Include="Scripts\js\jquery\custom_jquery.js" />
+    <Content Include="Scripts\js\jquery\date.js" />
+    <Content Include="Scripts\js\jquery\jquery-1.4.1.min.js" />
+    <Content Include="Scripts\js\jquery\jquery.bind.js" />
+    <Content Include="Scripts\js\jquery\jquery.datePicker.js" />
+    <Content Include="Scripts\js\jquery\jquery.dimensions.js" />
+    <Content Include="Scripts\js\jquery\jquery.filestyle.js" />
+    <Content Include="Scripts\js\jquery\jquery.pngFix.pack.js" />
+    <Content Include="Scripts\js\jquery\jquery.selectbox-0.5.js" />
+    <Content Include="Scripts\js\jquery\jquery.selectbox-0.5_style_2.js" />
+    <Content Include="Scripts\js\jquery\jquery.selectbox-0.5_style_3.js" />
+    <Content Include="Scripts\js\jquery\jquery.tooltip.js" />
+    <Content Include="Scripts\js\jquery\jquery.usermode.js" />
+    <Content Include="Scripts\js\jquery\ui.checkbox.js" />
+    <Content Include="Scripts\js\jquery\ui.core.js" />
+    <Content Include="Scripts\Store\AddStore.js" />
+    <Content Include="Scripts\Store\EditStore.js" />
+    <Content Include="Views\Account\Users.aspx" />
+    <Content Include="Views\EOD\Index.aspx" />
+    <Content Include="Views\Order\Index.aspx" />
+    <Content Include="Views\Shared\LogIn.master" />
+    <None Include="Web References\3dApi\cart.disco" />
+    <Content Include="Scripts\blue\asc.gif" />
+    <Content Include="Scripts\blue\bg.gif" />
+    <Content Include="Scripts\blue\desc.gif" />
+    <Content Include="Scripts\blue\style.css" />
+    <Content Include="Scripts\jquery.tablesorter.js" />
+    <Content Include="Scripts\Store\index.js" />
+    <Content Include="Views\Store\AddStore.aspx" />
+    <Content Include="Views\Store\EditStore.aspx" />
+    <Content Include="Views\Store\Index.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Views\Account\ChangePassword.aspx" />
+    <Content Include="Views\Account\ChangePasswordSuccess.aspx" />
+    <Content Include="Views\Account\LogOn.aspx" />
+    <Content Include="Views\Account\Register.aspx" />
+    <Content Include="Views\Home\About.aspx" />
+    <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\Shared\Error.aspx" />
+    <Content Include="Views\Shared\LogOnUserControl.ascx" />
+    <Content Include="Views\Shared\Site.Master" />
+    <Content Include="Views\Web.config" />
+    <None Include="Web References\3dApi\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://api.3dcart.com/cart.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\3dApi\</RelPath>
+      <UpdateFromURL>http://api.3dcart.com/cart.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>OrderStatusWeb_com_3dcart_api_cartAPI</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\3dApi\cart.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OrderStatusCore\OrderStatusCore.csproj">
+      <Project>{0CFB590D-BA4A-4771-B2B4-6852A5E5174D}</Project>
+      <Name>OrderStatusCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrderStatusData\OrderStatusData.csproj">
+      <Project>{61E212FD-9A8A-4013-A4D1-FE3F4501E337}</Project>
+      <Name>OrderStatusData</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>60520</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

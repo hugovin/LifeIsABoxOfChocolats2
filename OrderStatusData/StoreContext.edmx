@@ -1,0 +1,847 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="orderstatusModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="orderstatusModelStoreContainer">
+          <EntitySet Name="carriers" EntityType="orderstatusModel.Store.carriers" store:Type="Tables" Schema="orderstatus" />
+          <EntitySet Name="custom_shipments" EntityType="orderstatusModel.Store.custom_shipments" store:Type="Tables" Schema="orderstatus" />
+          <EntitySet Name="my_aspnet_applications" EntityType="orderstatusModel.Store.my_aspnet_applications" store:Type="Tables" Schema="orderstatus" />
+          <EntitySet Name="my_aspnet_membership" EntityType="orderstatusModel.Store.my_aspnet_membership" store:Type="Tables" Schema="orderstatus" />
+          <EntitySet Name="my_aspnet_profiles" EntityType="orderstatusModel.Store.my_aspnet_profiles" store:Type="Tables" Schema="orderstatus" />
+          <EntitySet Name="my_aspnet_roles" EntityType="orderstatusModel.Store.my_aspnet_roles" store:Type="Tables" Schema="orderstatus" />
+          <EntitySet Name="my_aspnet_sessioncleanup" EntityType="orderstatusModel.Store.my_aspnet_sessioncleanup" store:Type="Tables" store:Schema="orderstatus" store:Name="my_aspnet_sessioncleanup">
+            <DefiningQuery>SELECT
+      `my_aspnet_sessioncleanup`.`LastRun`, 
+      `my_aspnet_sessioncleanup`.`IntervalMinutes`
+      FROM `my_aspnet_sessioncleanup` AS `my_aspnet_sessioncleanup`</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="my_aspnet_sessions" EntityType="orderstatusModel.Store.my_aspnet_sessions" store:Type="Tables" Schema="orderstatus" />
+          <EntitySet Name="my_aspnet_users" EntityType="orderstatusModel.Store.my_aspnet_users" store:Type="Tables" Schema="orderstatus" />
+          <EntitySet Name="my_aspnet_usersinroles" EntityType="orderstatusModel.Store.my_aspnet_usersinroles" store:Type="Tables" Schema="orderstatus" />
+          <EntitySet Name="order" EntityType="orderstatusModel.Store.order" store:Type="Tables" Schema="orderstatus" />
+          <EntitySet Name="order_status_by_store" EntityType="orderstatusModel.Store.order_status_by_store" store:Type="Tables" Schema="orderstatus" />
+          <EntitySet Name="order_status_values" EntityType="orderstatusModel.Store.order_status_values" store:Type="Tables" Schema="orderstatus" />
+          <EntitySet Name="stores_data" EntityType="orderstatusModel.Store.stores_data" store:Type="Tables" Schema="orderstatus" />
+          <EntitySet Name="ups_services" EntityType="orderstatusModel.Store.ups_services" store:Type="Tables" Schema="orderstatus" />
+          <EntitySet Name="usps_service" EntityType="orderstatusModel.Store.usps_service" store:Type="Tables" Schema="orderstatus" />
+          <AssociationSet Name="fk_order_status_by_store" Association="orderstatusModel.Store.fk_order_status_by_store">
+            <End Role="order_status_values" EntitySet="order_status_values" />
+            <End Role="order_status_by_store" EntitySet="order_status_by_store" />
+          </AssociationSet>
+          <AssociationSet Name="fk_store" Association="orderstatusModel.Store.fk_store">
+            <End Role="stores_data" EntitySet="stores_data" />
+            <End Role="custom_shipments" EntitySet="custom_shipments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_store_data" Association="orderstatusModel.Store.fk_store_data">
+            <End Role="stores_data" EntitySet="stores_data" />
+            <End Role="order_status_by_store" EntitySet="order_status_by_store" />
+          </AssociationSet>
+          <AssociationSet Name="fk_storeid" Association="orderstatusModel.Store.fk_storeid">
+            <End Role="stores_data" EntitySet="stores_data" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="carriers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" />
+          <Property Name="dateCreated" Type="datetime" />
+          <Property Name="dateModified" Type="datetime" />
+          <Property Name="isActive" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="custom_shipments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="storeId" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" />
+          <Property Name="dateCreated" Type="datetime" />
+          <Property Name="dateModified" Type="datetime" />
+          <Property Name="isActive" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="my_aspnet_applications">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" MaxLength="256" />
+          <Property Name="description" Type="varchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="my_aspnet_membership">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="128" />
+          <Property Name="Comment" Type="varchar" MaxLength="255" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="128" />
+          <Property Name="PasswordKey" Type="char" MaxLength="32" />
+          <Property Name="PasswordFormat" Type="tinyint" />
+          <Property Name="PasswordQuestion" Type="varchar" MaxLength="255" />
+          <Property Name="PasswordAnswer" Type="varchar" MaxLength="255" />
+          <Property Name="IsApproved" Type="bool" />
+          <Property Name="LastActivityDate" Type="datetime" />
+          <Property Name="LastLoginDate" Type="datetime" />
+          <Property Name="LastPasswordChangedDate" Type="datetime" />
+          <Property Name="CreationDate" Type="datetime" />
+          <Property Name="IsLockedOut" Type="bool" />
+          <Property Name="LastLockedOutDate" Type="datetime" />
+          <Property Name="FailedPasswordAttemptCount" Type="uint" />
+          <Property Name="FailedPasswordAttemptWindowStart" Type="datetime" />
+          <Property Name="FailedPasswordAnswerAttemptCount" Type="uint" />
+          <Property Name="FailedPasswordAnswerAttemptWindowStart" Type="datetime" />
+        </EntityType>
+        <EntityType Name="my_aspnet_profiles">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="valueindex" Type="longtext" />
+          <Property Name="stringdata" Type="longtext" />
+          <Property Name="binarydata" Type="longblob" />
+          <Property Name="lastUpdatedDate" Type="timestamp" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="my_aspnet_roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="applicationId" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'def.orderstatus.my_aspnet_sessioncleanup' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="my_aspnet_sessioncleanup">
+          <Key>
+            <PropertyRef Name="LastRun" />
+            <PropertyRef Name="IntervalMinutes" />
+          </Key>
+          <Property Name="LastRun" Type="datetime" Nullable="false" />
+          <Property Name="IntervalMinutes" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="my_aspnet_sessions">
+          <Key>
+            <PropertyRef Name="SessionId" />
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="SessionId" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="ApplicationId" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Expires" Type="datetime" Nullable="false" />
+          <Property Name="LockDate" Type="datetime" Nullable="false" />
+          <Property Name="LockId" Type="int" Nullable="false" />
+          <Property Name="Timeout" Type="int" Nullable="false" />
+          <Property Name="Locked" Type="bool" Nullable="false" />
+          <Property Name="SessionItems" Type="longblob" />
+          <Property Name="Flags" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="my_aspnet_users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="applicationId" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="256" />
+          <Property Name="isAnonymous" Type="bool" Nullable="false" />
+          <Property Name="lastActivityDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="my_aspnet_usersinroles">
+          <Key>
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="roleId" />
+          </Key>
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="roleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="storeId" Type="int" />
+          <Property Name="email_flag" Type="int" />
+          <Property Name="orderId" Type="varchar" MaxLength="45" />
+          <Property Name="invoice_number" Type="varchar" MaxLength="45" />
+          <Property Name="customerid" Type="varchar" MaxLength="45" />
+          <Property Name="name" Type="varchar" MaxLength="300" />
+          <Property Name="company" Type="varchar" MaxLength="100" />
+          <Property Name="address" Type="varchar" MaxLength="300" />
+          <Property Name="address2" Type="varchar" MaxLength="200" />
+          <Property Name="city" Type="varchar" MaxLength="100" />
+          <Property Name="state" Type="varchar" MaxLength="100" />
+          <Property Name="zip" Type="varchar" MaxLength="20" />
+          <Property Name="country" Type="varchar" MaxLength="50" />
+          <Property Name="phone" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="200" />
+          <Property Name="ups_service" Type="varchar" MaxLength="100" />
+          <Property Name="usps_service" Type="varchar" MaxLength="100" />
+          <Property Name="tracking_code" Type="varchar" MaxLength="100" />
+          <Property Name="date_created" Type="datetime" />
+          <Property Name="date_modifed" Type="datetime" />
+        </EntityType>
+        <EntityType Name="order_status_by_store">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="storeid" Type="int" Nullable="false" />
+          <Property Name="order_status_value" Type="int" Nullable="false" />
+          <Property Name="date_created" Type="datetime" />
+          <Property Name="date_modified" Type="datetime" />
+          <Property Name="is_valid" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="order_status_values">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="text" Type="varchar" MaxLength="45" />
+          <Property Name="isPublic" Type="tinyint" />
+          <Property Name="dateCreated" Type="datetime" />
+          <Property Name="dateModified" Type="datetime" />
+          <Property Name="isActive" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="stores_data">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="interval" Type="int" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="url" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="api_user" Type="varchar" MaxLength="45" />
+          <Property Name="api_key" Type="varchar" Nullable="false" MaxLength="32" />
+          <Property Name="last_run" Type="datetime" />
+          <Property Name="dateCreated" Type="datetime" />
+          <Property Name="dateModified" Type="datetime" />
+          <Property Name="isActive" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="ups_services">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="service" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="usps_service">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="service" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="fk_order_status_by_store">
+          <End Role="order_status_values" Type="orderstatusModel.Store.order_status_values" Multiplicity="1" />
+          <End Role="order_status_by_store" Type="orderstatusModel.Store.order_status_by_store" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order_status_values">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_status_by_store">
+              <PropertyRef Name="order_status_value" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_store">
+          <End Role="stores_data" Type="orderstatusModel.Store.stores_data" Multiplicity="1" />
+          <End Role="custom_shipments" Type="orderstatusModel.Store.custom_shipments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="stores_data">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="custom_shipments">
+              <PropertyRef Name="storeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_store_data">
+          <End Role="stores_data" Type="orderstatusModel.Store.stores_data" Multiplicity="1" />
+          <End Role="order_status_by_store" Type="orderstatusModel.Store.order_status_by_store" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="stores_data">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_status_by_store">
+              <PropertyRef Name="storeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_storeid">
+          <End Role="stores_data" Type="orderstatusModel.Store.stores_data" Multiplicity="0..1" />
+          <End Role="order" Type="orderstatusModel.Store.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="stores_data">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="storeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+      warning 6013: The table/view 'def.orderstatus.my_aspnet_schemaversion' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+      
+      <EntityType Name="my_aspnet_schemaversion">
+        <Property Name="version" Type="int" />
+      </EntityType>-->
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="orderstatusModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="orderstatusEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="carriers" EntityType="orderstatusModel.carrier" />
+          <EntitySet Name="custom_shipments" EntityType="orderstatusModel.custom_shipments" />
+          <EntitySet Name="my_aspnet_applications" EntityType="orderstatusModel.my_aspnet_applications" />
+          <EntitySet Name="my_aspnet_membership" EntityType="orderstatusModel.my_aspnet_membership" />
+          <EntitySet Name="my_aspnet_profiles" EntityType="orderstatusModel.my_aspnet_profiles" />
+          <EntitySet Name="my_aspnet_roles" EntityType="orderstatusModel.my_aspnet_roles" />
+          <EntitySet Name="my_aspnet_sessioncleanup" EntityType="orderstatusModel.my_aspnet_sessioncleanup" />
+          <EntitySet Name="my_aspnet_sessions" EntityType="orderstatusModel.my_aspnet_sessions" />
+          <EntitySet Name="my_aspnet_users" EntityType="orderstatusModel.my_aspnet_users" />
+          <EntitySet Name="my_aspnet_usersinroles" EntityType="orderstatusModel.my_aspnet_usersinroles" />
+          <EntitySet Name="orders" EntityType="orderstatusModel.order" />
+          <EntitySet Name="order_status_by_store" EntityType="orderstatusModel.order_status_by_store" />
+          <EntitySet Name="order_status_values" EntityType="orderstatusModel.order_status_values" />
+          <EntitySet Name="stores_data" EntityType="orderstatusModel.stores_data" />
+          <EntitySet Name="ups_services" EntityType="orderstatusModel.ups_services" />
+          <EntitySet Name="usps_service" EntityType="orderstatusModel.usps_service" />
+          <AssociationSet Name="fk_store" Association="orderstatusModel.fk_store">
+            <End Role="stores_data" EntitySet="stores_data" />
+            <End Role="custom_shipments" EntitySet="custom_shipments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_storeid" Association="orderstatusModel.fk_storeid">
+            <End Role="stores_data" EntitySet="stores_data" />
+            <End Role="order" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="fk_order_status_by_store" Association="orderstatusModel.fk_order_status_by_store">
+            <End Role="order_status_values" EntitySet="order_status_values" />
+            <End Role="order_status_by_store" EntitySet="order_status_by_store" />
+          </AssociationSet>
+          <AssociationSet Name="fk_store_data" Association="orderstatusModel.fk_store_data">
+            <End Role="stores_data" EntitySet="stores_data" />
+            <End Role="order_status_by_store" EntitySet="order_status_by_store" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="carrier">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="name" />
+          <Property Type="DateTime" Name="dateCreated" />
+          <Property Type="DateTime" Name="dateModified" />
+          <Property Type="String" Name="isActive" />
+        </EntityType>
+        <EntityType Name="custom_shipments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="storeId" Nullable="false" />
+          <Property Type="String" Name="name" />
+          <Property Type="DateTime" Name="dateCreated" />
+          <Property Type="DateTime" Name="dateModified" />
+          <Property Type="SByte" Name="isActive" />
+          <NavigationProperty Name="stores_data" Relationship="orderstatusModel.fk_store" FromRole="custom_shipments" ToRole="stores_data" />
+        </EntityType>
+        <EntityType Name="my_aspnet_applications">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="name" />
+          <Property Type="String" Name="description" />
+        </EntityType>
+        <EntityType Name="my_aspnet_membership">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Type="Int32" Name="userId" Nullable="false" />
+          <Property Type="String" Name="Email" />
+          <Property Type="String" Name="Comment" />
+          <Property Type="String" Name="Password" Nullable="false" />
+          <Property Type="String" Name="PasswordKey" />
+          <Property Type="SByte" Name="PasswordFormat" />
+          <Property Type="String" Name="PasswordQuestion" />
+          <Property Type="String" Name="PasswordAnswer" />
+          <Property Type="Boolean" Name="IsApproved" />
+          <Property Type="DateTime" Name="LastActivityDate" />
+          <Property Type="DateTime" Name="LastLoginDate" />
+          <Property Type="DateTime" Name="LastPasswordChangedDate" />
+          <Property Type="DateTime" Name="CreationDate" />
+          <Property Type="Boolean" Name="IsLockedOut" />
+          <Property Type="DateTime" Name="LastLockedOutDate" />
+          <Property Type="Int64" Name="FailedPasswordAttemptCount" />
+          <Property Type="DateTime" Name="FailedPasswordAttemptWindowStart" />
+          <Property Type="Int64" Name="FailedPasswordAnswerAttemptCount" />
+          <Property Type="DateTime" Name="FailedPasswordAnswerAttemptWindowStart" />
+        </EntityType>
+        <EntityType Name="my_aspnet_profiles">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Type="Int32" Name="userId" Nullable="false" />
+          <Property Type="String" Name="valueindex" />
+          <Property Type="String" Name="stringdata" />
+          <Property Type="Binary" Name="binarydata" />
+          <Property Type="DateTime" Name="lastUpdatedDate" Nullable="false" />
+        </EntityType>
+        <EntityType Name="my_aspnet_roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="applicationId" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" />
+        </EntityType>
+        <EntityType Name="my_aspnet_sessioncleanup">
+          <Key>
+            <PropertyRef Name="LastRun" />
+            <PropertyRef Name="IntervalMinutes" />
+          </Key>
+          <Property Type="DateTime" Name="LastRun" Nullable="false" />
+          <Property Type="Int32" Name="IntervalMinutes" Nullable="false" />
+        </EntityType>
+        <EntityType Name="my_aspnet_sessions">
+          <Key>
+            <PropertyRef Name="SessionId" />
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Type="String" Name="SessionId" Nullable="false" />
+          <Property Type="Int32" Name="ApplicationId" Nullable="false" />
+          <Property Type="DateTime" Name="Created" Nullable="false" />
+          <Property Type="DateTime" Name="Expires" Nullable="false" />
+          <Property Type="DateTime" Name="LockDate" Nullable="false" />
+          <Property Type="Int32" Name="LockId" Nullable="false" />
+          <Property Type="Int32" Name="Timeout" Nullable="false" />
+          <Property Type="Boolean" Name="Locked" Nullable="false" />
+          <Property Type="Binary" Name="SessionItems" />
+          <Property Type="Int32" Name="Flags" Nullable="false" />
+        </EntityType>
+        <EntityType Name="my_aspnet_users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="applicationId" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" />
+          <Property Type="Boolean" Name="isAnonymous" Nullable="false" />
+          <Property Type="DateTime" Name="lastActivityDate" />
+        </EntityType>
+        <EntityType Name="my_aspnet_usersinroles">
+          <Key>
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="roleId" />
+          </Key>
+          <Property Type="Int32" Name="userId" Nullable="false" />
+          <Property Type="Int32" Name="roleId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="storeId" />
+          <Property Type="Int32" Name="email_flag" />
+          <Property Type="String" Name="orderId" />
+          <Property Type="String" Name="invoice_number" />
+          <Property Type="String" Name="customerid" />
+          <Property Type="String" Name="name" />
+          <Property Type="String" Name="company" />
+          <Property Type="String" Name="address" />
+          <Property Type="String" Name="address2" />
+          <Property Type="String" Name="city" />
+          <Property Type="String" Name="state" />
+          <Property Type="String" Name="zip" />
+          <Property Type="String" Name="country" />
+          <Property Type="String" Name="phone" />
+          <Property Type="String" Name="email" />
+          <Property Type="String" Name="ups_service" />
+          <Property Type="String" Name="usps_service" />
+          <Property Type="String" Name="tracking_code" />
+          <Property Type="DateTime" Name="date_created" />
+          <Property Type="DateTime" Name="date_modifed" />
+          <NavigationProperty Name="stores_data" Relationship="orderstatusModel.fk_storeid" FromRole="order" ToRole="stores_data" />
+        </EntityType>
+        <EntityType Name="order_status_by_store">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="storeid" Nullable="false" />
+          <Property Type="Int32" Name="order_status_value" Nullable="false" />
+          <Property Type="DateTime" Name="date_created" />
+          <Property Type="DateTime" Name="date_modified" />
+          <Property Type="SByte" Name="is_valid" />
+          <NavigationProperty Name="order_status_values" Relationship="orderstatusModel.fk_order_status_by_store" FromRole="order_status_by_store" ToRole="order_status_values" />
+          <NavigationProperty Name="stores_data" Relationship="orderstatusModel.fk_store_data" FromRole="order_status_by_store" ToRole="stores_data" />
+        </EntityType>
+        <EntityType Name="order_status_values">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="text" />
+          <Property Type="SByte" Name="isPublic" />
+          <Property Type="DateTime" Name="dateCreated" />
+          <Property Type="DateTime" Name="dateModified" />
+          <Property Type="SByte" Name="isActive" />
+          <NavigationProperty Name="order_status_by_store" Relationship="orderstatusModel.fk_order_status_by_store" FromRole="order_status_values" ToRole="order_status_by_store" />
+        </EntityType>
+        <EntityType Name="stores_data">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="interval" />
+          <Property Type="String" Name="name" Nullable="false" />
+          <Property Type="String" Name="url" Nullable="false" />
+          <Property Type="String" Name="api_user" />
+          <Property Type="String" Name="api_key" Nullable="false" />
+          <Property Type="DateTime" Name="last_run" />
+          <Property Type="DateTime" Name="dateCreated" />
+          <Property Type="DateTime" Name="dateModified" />
+          <Property Type="SByte" Name="isActive" />
+          <NavigationProperty Name="custom_shipments" Relationship="orderstatusModel.fk_store" FromRole="stores_data" ToRole="custom_shipments" />
+          <NavigationProperty Name="orders" Relationship="orderstatusModel.fk_storeid" FromRole="stores_data" ToRole="order" />
+          <NavigationProperty Name="order_status_by_store" Relationship="orderstatusModel.fk_store_data" FromRole="stores_data" ToRole="order_status_by_store" />
+        </EntityType>
+        <EntityType Name="ups_services">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="service" />
+        </EntityType>
+        <EntityType Name="usps_service">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="service" />
+        </EntityType>
+        <Association Name="fk_store">
+          <End Type="orderstatusModel.stores_data" Role="stores_data" Multiplicity="1" />
+          <End Type="orderstatusModel.custom_shipments" Role="custom_shipments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="stores_data">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="custom_shipments">
+              <PropertyRef Name="storeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_storeid">
+          <End Type="orderstatusModel.stores_data" Role="stores_data" Multiplicity="0..1" />
+          <End Type="orderstatusModel.order" Role="order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="stores_data">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="storeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_order_status_by_store">
+          <End Type="orderstatusModel.order_status_values" Role="order_status_values" Multiplicity="1" />
+          <End Type="orderstatusModel.order_status_by_store" Role="order_status_by_store" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order_status_values">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_status_by_store">
+              <PropertyRef Name="order_status_value" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_store_data">
+          <End Type="orderstatusModel.stores_data" Role="stores_data" Multiplicity="1" />
+          <End Type="orderstatusModel.order_status_by_store" Role="order_status_by_store" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="stores_data">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_status_by_store">
+              <PropertyRef Name="storeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="orderstatusModelStoreContainer" CdmEntityContainer="orderstatusEntities">
+          <EntitySetMapping Name="carriers">
+            <EntityTypeMapping TypeName="orderstatusModel.carrier">
+              <MappingFragment StoreEntitySet="carriers">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="dateModified" ColumnName="dateModified" />
+                <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="custom_shipments">
+            <EntityTypeMapping TypeName="orderstatusModel.custom_shipments">
+              <MappingFragment StoreEntitySet="custom_shipments">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="dateModified" ColumnName="dateModified" />
+                <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="storeId" ColumnName="storeId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="my_aspnet_applications">
+            <EntityTypeMapping TypeName="orderstatusModel.my_aspnet_applications">
+              <MappingFragment StoreEntitySet="my_aspnet_applications">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="my_aspnet_membership">
+            <EntityTypeMapping TypeName="orderstatusModel.my_aspnet_membership">
+              <MappingFragment StoreEntitySet="my_aspnet_membership">
+                <ScalarProperty Name="FailedPasswordAnswerAttemptWindowStart" ColumnName="FailedPasswordAnswerAttemptWindowStart" />
+                <ScalarProperty Name="FailedPasswordAnswerAttemptCount" ColumnName="FailedPasswordAnswerAttemptCount" />
+                <ScalarProperty Name="FailedPasswordAttemptWindowStart" ColumnName="FailedPasswordAttemptWindowStart" />
+                <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
+                <ScalarProperty Name="LastLockedOutDate" ColumnName="LastLockedOutDate" />
+                <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="PasswordAnswer" ColumnName="PasswordAnswer" />
+                <ScalarProperty Name="PasswordQuestion" ColumnName="PasswordQuestion" />
+                <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
+                <ScalarProperty Name="PasswordKey" ColumnName="PasswordKey" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="my_aspnet_profiles">
+            <EntityTypeMapping TypeName="orderstatusModel.my_aspnet_profiles">
+              <MappingFragment StoreEntitySet="my_aspnet_profiles">
+                <ScalarProperty Name="lastUpdatedDate" ColumnName="lastUpdatedDate" />
+                <ScalarProperty Name="binarydata" ColumnName="binarydata" />
+                <ScalarProperty Name="stringdata" ColumnName="stringdata" />
+                <ScalarProperty Name="valueindex" ColumnName="valueindex" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="my_aspnet_roles">
+            <EntityTypeMapping TypeName="orderstatusModel.my_aspnet_roles">
+              <MappingFragment StoreEntitySet="my_aspnet_roles">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="applicationId" ColumnName="applicationId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="my_aspnet_sessioncleanup">
+            <EntityTypeMapping TypeName="orderstatusModel.my_aspnet_sessioncleanup">
+              <MappingFragment StoreEntitySet="my_aspnet_sessioncleanup">
+                <ScalarProperty Name="IntervalMinutes" ColumnName="IntervalMinutes" />
+                <ScalarProperty Name="LastRun" ColumnName="LastRun" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="my_aspnet_sessions">
+            <EntityTypeMapping TypeName="orderstatusModel.my_aspnet_sessions">
+              <MappingFragment StoreEntitySet="my_aspnet_sessions">
+                <ScalarProperty Name="Flags" ColumnName="Flags" />
+                <ScalarProperty Name="SessionItems" ColumnName="SessionItems" />
+                <ScalarProperty Name="Locked" ColumnName="Locked" />
+                <ScalarProperty Name="Timeout" ColumnName="Timeout" />
+                <ScalarProperty Name="LockId" ColumnName="LockId" />
+                <ScalarProperty Name="LockDate" ColumnName="LockDate" />
+                <ScalarProperty Name="Expires" ColumnName="Expires" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="my_aspnet_users">
+            <EntityTypeMapping TypeName="orderstatusModel.my_aspnet_users">
+              <MappingFragment StoreEntitySet="my_aspnet_users">
+                <ScalarProperty Name="lastActivityDate" ColumnName="lastActivityDate" />
+                <ScalarProperty Name="isAnonymous" ColumnName="isAnonymous" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="applicationId" ColumnName="applicationId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="my_aspnet_usersinroles">
+            <EntityTypeMapping TypeName="orderstatusModel.my_aspnet_usersinroles">
+              <MappingFragment StoreEntitySet="my_aspnet_usersinroles">
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders">
+            <EntityTypeMapping TypeName="orderstatusModel.order">
+              <MappingFragment StoreEntitySet="order">
+                <ScalarProperty Name="date_modifed" ColumnName="date_modifed" />
+                <ScalarProperty Name="date_created" ColumnName="date_created" />
+                <ScalarProperty Name="tracking_code" ColumnName="tracking_code" />
+                <ScalarProperty Name="usps_service" ColumnName="usps_service" />
+                <ScalarProperty Name="ups_service" ColumnName="ups_service" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="address2" ColumnName="address2" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="customerid" ColumnName="customerid" />
+                <ScalarProperty Name="invoice_number" ColumnName="invoice_number" />
+                <ScalarProperty Name="orderId" ColumnName="orderId" />
+                <ScalarProperty Name="email_flag" ColumnName="email_flag" />
+                <ScalarProperty Name="storeId" ColumnName="storeId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_status_by_store">
+            <EntityTypeMapping TypeName="orderstatusModel.order_status_by_store">
+              <MappingFragment StoreEntitySet="order_status_by_store">
+                <ScalarProperty Name="is_valid" ColumnName="is_valid" />
+                <ScalarProperty Name="date_modified" ColumnName="date_modified" />
+                <ScalarProperty Name="date_created" ColumnName="date_created" />
+                <ScalarProperty Name="order_status_value" ColumnName="order_status_value" />
+                <ScalarProperty Name="storeid" ColumnName="storeid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_status_values">
+            <EntityTypeMapping TypeName="orderstatusModel.order_status_values">
+              <MappingFragment StoreEntitySet="order_status_values">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="dateModified" ColumnName="dateModified" />
+                <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+                <ScalarProperty Name="isPublic" ColumnName="isPublic" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="stores_data">
+            <EntityTypeMapping TypeName="orderstatusModel.stores_data">
+              <MappingFragment StoreEntitySet="stores_data">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="dateModified" ColumnName="dateModified" />
+                <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+                <ScalarProperty Name="last_run" ColumnName="last_run" />
+                <ScalarProperty Name="api_key" ColumnName="api_key" />
+                <ScalarProperty Name="api_user" ColumnName="api_user" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="interval" ColumnName="interval" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ups_services">
+            <EntityTypeMapping TypeName="orderstatusModel.ups_services">
+              <MappingFragment StoreEntitySet="ups_services">
+                <ScalarProperty Name="service" ColumnName="service" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usps_service">
+            <EntityTypeMapping TypeName="orderstatusModel.usps_service">
+              <MappingFragment StoreEntitySet="usps_service">
+                <ScalarProperty Name="service" ColumnName="service" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="StoreContext">
+        <EntityTypeShape EntityType="orderstatusModel.carrier" Width="1.5" PointX="5.75" PointY="2.5" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="orderstatusModel.custom_shipments" Width="1.5" PointX="3" PointY="4.75" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="orderstatusModel.my_aspnet_applications" Width="1.5" PointX="7.75" PointY="2.5" Height="1.5956835937500031" />
+        <EntityTypeShape EntityType="orderstatusModel.my_aspnet_membership" Width="1.5" PointX="8.75" PointY="5.5" Height="4.6725065104166674" />
+        <EntityTypeShape EntityType="orderstatusModel.my_aspnet_profiles" Width="1.5" PointX="9.75" PointY="2.5" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="orderstatusModel.my_aspnet_roles" Width="1.5" PointX="5.75" PointY="11.5" Height="1.5956835937500031" />
+        <EntityTypeShape EntityType="orderstatusModel.my_aspnet_sessioncleanup" Width="1.5" PointX="0.75" PointY="2.5" Height="1.4033821614583282" />
+        <EntityTypeShape EntityType="orderstatusModel.my_aspnet_sessions" Width="1.5" PointX="7.75" PointY="11.5" Height="2.9417936197916674" />
+        <EntityTypeShape EntityType="orderstatusModel.my_aspnet_users" Width="1.5" PointX="9.75" PointY="11.5" Height="1.9802864583333246" />
+        <EntityTypeShape EntityType="orderstatusModel.my_aspnet_usersinroles" Width="1.5" PointX="5.75" PointY="5.5" Height="1.4033821614583246" />
+        <EntityTypeShape EntityType="orderstatusModel.order" Width="1.5" PointX="3" PointY="7.875" Height="5.2494108072916674" />
+        <EntityTypeShape EntityType="orderstatusModel.order_status_by_store" Width="1.5" PointX="7.375" PointY="7" Height="2.5571907552083388" />
+        <EntityTypeShape EntityType="orderstatusModel.order_status_values" Width="1.5" PointX="3.75" PointY="0.75" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="orderstatusModel.stores_data" Width="1.5" PointX="0.75" PointY="7.125" Height="3.5186979166666674" />
+        <EntityTypeShape EntityType="orderstatusModel.ups_services" Width="1.5" PointX="10.75" PointY="5.5" Height="1.4033821614583246" />
+        <EntityTypeShape EntityType="orderstatusModel.usps_service" Width="1.5" PointX="10.75" PointY="8.5" Height="1.4033821614583246" />
+        <AssociationConnector Association="orderstatusModel.fk_store" >
+          <ConnectorPoint PointX="1.5" PointY="7.125" />
+          <ConnectorPoint PointX="1.5" PointY="5.9324446614583337" />
+          <ConnectorPoint PointX="3" PointY="5.9324446614583337" />
+        </AssociationConnector>
+        <AssociationConnector Association="orderstatusModel.fk_storeid" >
+          <ConnectorPoint PointX="2.25" PointY="9.2593489583333337" />
+          <ConnectorPoint PointX="3" PointY="9.2593489583333337" />
+        </AssociationConnector>
+        <AssociationConnector Association="orderstatusModel.fk_order_status_by_store" >
+          <ConnectorPoint PointX="4.90625" PointY="3.1148893229166674" />
+          <ConnectorPoint PointX="4.90625" PointY="7.4949446614583337" />
+          <ConnectorPoint PointX="7.375" PointY="7.4949446614583337" />
+        </AssociationConnector>
+        <AssociationConnector Association="orderstatusModel.fk_store_data" >
+          <ConnectorPoint PointX="2.25" PointY="7.2474723307291669" />
+          <ConnectorPoint PointX="4.822916666666667" PointY="7.247472330729166" />
+          <ConnectorPoint PointX="4.989583333333333" PointY="7.2474723307291669" />
+          <ConnectorPoint PointX="7.375" PointY="7.2474723307291669" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
