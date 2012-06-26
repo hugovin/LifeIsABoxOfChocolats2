@@ -17,15 +17,9 @@ namespace OrderStatusWeb
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-              "Default",
-              "{controller}.mvc/{action}/{id}",
-              new { action = "Index", id = "" }
-            );
-
-            routes.MapRoute(
-              "Root",
-              "",
-              new { controller = "Home", action = "Index", id = "" }
+                "Default", // Route name
+                "{controller}/{action}/{id}", // URL with parameters
+                new { controller = "Account", action = "LogOn", id = UrlParameter.Optional } // Parameter defaults
             );
 
         }
