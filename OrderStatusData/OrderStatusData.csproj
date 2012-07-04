@@ -79,8 +79,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StoreContext.edmx</DependentUpon>
     </Compile>
-    <Compile Include="UPS\UpsDbMethods.cs" />
-    <Compile Include="USPS\UspsDbMethods.cs" />
+    <Compile Include="OrdersRepository\OrdersRepositoryDbMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config">

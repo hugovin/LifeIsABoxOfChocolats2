@@ -1,40 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using OrderStatusData.DataTransferObjects;
 using OrderStatusData.UPS;
-using OrderStatusData.USPS;
 
 namespace OrderStatusCore
 {
     public class EOD
     {
-        public bool UpsEOD()
+        public bool OrdersEOD()
         {
-            UpsDbMethods upsDbMethods = new UpsDbMethods();
+            OrdersRepositoryDbMethods ordersRepositoryDbMethods = new OrdersRepositoryDbMethods();
             Orders order = new Orders();
-            List<OrderDto> listOfOrders = upsDbMethods.ReadAllEodUpsData();
+            List<OrderDto> listOfOrders = ordersRepositoryDbMethods.ReadAllEodOrderDataToRepository();
             foreach (var listOfOrder in listOfOrders)
             {
                 order.UpdateOrderByInvoice(listOfOrder.InvoiceNumber, listOfOrder.TrackingCode);
-                upsDbMethods.RemoveOrderFromUpsImport(listOfOrder.InvoiceNumber);
+                ordersRepositoryDbMethods.RemoveOrderFromOrderDataToRepository(listOfOrder.InvoiceNumber);
             }
-            return upsDbMethods.CleanUpsAccessFile();
-        }
-
-        public bool UspsEOD()
-        {
-            UspsDbMethods uspsDbMethods = new UspsDbMethods();
-            Orders order = new Orders();
-            List<OrderDto> listOfOrders = uspsDbMethods.ReadAllEodUspsData();
-            foreach (var listOfOrder in listOfOrders)
-            {
-                order.UpdateOrderByInvoice(listOfOrder.InvoiceNumber, listOfOrder.TrackingCode);
-                uspsDbMethods.RemoveOrderFromUspsExport(listOfOrder.InvoiceNumber);
-            }
-            return uspsDbMethods.CleanUspsAccessFile();
-
+            return ordersRepositoryDbMethods.CleanOrderDataToRepository();
         }
     }
 }

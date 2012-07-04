@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 using OrderStatusData;
 using OrderStatusData.DataTransferObjects;
 using OrderStatusData.UPS;
-using OrderStatusData.USPS;
 using OrderStatusCore.DataType;
 using OrderStatusCore.API_3dCart;
-using System.Data.Linq.SqlClient;
 
 namespace OrderStatusCore
 {
@@ -36,7 +33,10 @@ namespace OrderStatusCore
                                                     CustomerId =
                                                         (orderData.CustomerID != null)
                                                             ? orderData.CustomerID.ToString()
-                                                            : ""
+                                                            : "",
+                                                    Email = (orderData.Email != null)
+                                                            ? orderData.Email.ToString()
+                                                            : "",
 
                                                 };
                         foreach (var ship in orderData.Shippinginfo)
@@ -78,8 +78,7 @@ namespace OrderStatusCore
         public bool CreateShippingInformation(XDocument xdoc,OrderDto orderDto)
         {
             var context = new orderstatusEntities();
-            UpsDbMethods upsDbMethods = new UpsDbMethods();
-            UspsDbMethods uspsDbMethods =new UspsDbMethods();
+            OrdersRepositoryDbMethods ordersRepositoryDbMethods = new OrdersRepositoryDbMethods();
             try
             {
                 int carrierType = 0;
@@ -121,15 +120,11 @@ namespace OrderStatusCore
                     orderDto.Phone = (ship.Phone != null) ? ship.Phone.ToString() : "";
                     orderDto.TrackingCode = (ship.TrackingCode != null) ? ship.TrackingCode.ToString() : "";
                     string method = (ship.Method != null) ? ship.Method.ToString() : "";
-                    #region DefineCarrier
-
                     if (!method.Equals(""))
                     {
-
-
                         if (method.Contains("UPS"))
                         {
-                            orderDto.UpsService = method;
+                            orderDto.UpsUspsService = method.Replace("UPS -","");
                             carrierType = CarrierType.Ups;
                         }
                         else
@@ -137,14 +132,14 @@ namespace OrderStatusCore
                             var upsResult = GetAllUpsServices().SingleOrDefault(s => s.Contains(method));
                             if (!string.IsNullOrEmpty(upsResult))
                             {
-                                orderDto.UpsService = method;
+                                orderDto.UpsUspsService = method.Replace("UPS -", "");
                                 carrierType = CarrierType.Ups;
                             }
                             else
                             {
                                 if (method.Contains("USPS"))
                                 {
-                                    orderDto.UspsService = method;
+                                    orderDto.UpsUspsService = method;
                                     carrierType = CarrierType.Usps;
                                 }
                                 else
@@ -153,22 +148,19 @@ namespace OrderStatusCore
                                     if (!string.IsNullOrEmpty(uspsResult))
                                     {
 
-                                        orderDto.UspsService = method;
+                                        orderDto.UpsUspsService = method;
                                         carrierType = CarrierType.Usps;
 
                                     }
-                                    else
-                                    {
-                                        //TODO Handle Custom shipping information
-                                    }
                                 }
                             }
-
                         }
-
-                        #endregion
-
-                        order newOrder = new order
+                    }
+                    else
+                    {
+                        orderDto.UpsUspsService = "Ground";
+                    }
+                    order newOrder = new order
                                              {
                                                  address = orderDto.Address,
                                                  address2 = orderDto.Address2,
@@ -186,36 +178,13 @@ namespace OrderStatusCore
                                                  name = orderDto.Name,
                                                  tracking_code = orderDto.TrackingCode,
                                                  phone = orderDto.Phone,
-                                                 usps_service = orderDto.UspsService,
-                                                 ups_service = orderDto.UpsService,
+                                                 ups_service = orderDto.UpsUspsService,
                                                  state = orderDto.State
                                              };
-                        context.orders.AddObject(newOrder);
-                        context.SaveChanges();
-
-                        if (carrierType == CarrierType.Ups)
-                        {
-                            upsDbMethods.InsertUPsData(orderDto);
-                        }
-                        else
-                        {
-                            if (carrierType == CarrierType.Usps)
-                            {
-
-                                uspsDbMethods.InsertUspsData(orderDto);
-                            }
-                            else
-                            {
-                                //TODO Custom shipping information 
-                            }
-                        }
-
-                    }
-
+                    context.orders.AddObject(newOrder);
+                    context.SaveChanges();
+                    ordersRepositoryDbMethods.InsertOrderDataToRepository(orderDto);
                 }
-
-
-
             }
             catch (InvalidOperationException exc)
             {
@@ -257,9 +226,6 @@ namespace OrderStatusCore
                 {
                     OrderDto orderDto = new OrderDto();
                     orderDto.Id = order.id;
-                    //orderDto.InvoiceNumber = order.invoiceNumber;
-                    //orderDto.OrderComment = order.orderComment;
-                    //orderDto.LastUpdate = DateTime.Parse(order.lastUpdate.ToString()).Date;
                     orderDto.OrderId = order.orderId;
                     allOrders.Add(orderDto);
                 }

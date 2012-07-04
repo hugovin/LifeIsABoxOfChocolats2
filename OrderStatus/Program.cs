@@ -15,17 +15,17 @@ namespace OrderStatus
         {
 
 
-            #if (!DEBUG)
-            ServiceBase[] ServicesToRun;
-            ServicesToRun = new ServiceBase[] 
-			{ 
-				new OrderStatusService() 
-			};
-            ServiceBase.Run(ServicesToRun);
-            #else
+            //#if (!DEBUG)
+            //ServiceBase[] ServicesToRun;
+            //ServicesToRun = new ServiceBase[] 
+            //{ 
+            //    new OrderStatusService() 
+            //};
+            //ServiceBase.Run(ServicesToRun);
+            //#else
             OrderStatusService orderDebug = new OrderStatusService();
             orderDebug.Start();
-            #endif 
+            //#endif 
         }
     }
 }

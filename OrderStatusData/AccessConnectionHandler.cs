@@ -9,36 +9,11 @@ namespace OrderStatusData
     public class AccessConnectionHandler
     {
         public static readonly Logger log = LogManager.GetCurrentClassLogger();
-        public  OleDbConnection GetUpsConnection()
+        public  OleDbConnection GetOrdersRepositoryConnection()
         {
             try
             {
-                return new OleDbConnection(ConfigurationManager.ConnectionStrings["AccessUps"].ConnectionString);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-
-        }
-
-        public OleDbConnection GetUspsConnection()
-        {
-            try
-            {
-                return new OleDbConnection(ConfigurationManager.ConnectionStrings["AccessUsps"].ConnectionString);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-
-        }
-        public OleDbConnection GetExpediaConnection()
-        {
-            try
-            {
-                return new OleDbConnection(ConfigurationManager.ConnectionStrings["AccessUps"].ConnectionString);
+                return new OleDbConnection(ConfigurationManager.ConnectionStrings["AccessOrdersRepository"].ConnectionString);
             }
             catch (Exception)
             {

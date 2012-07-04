@@ -24,5 +24,12 @@ namespace OrderStatusWeb.Controllers
             
             return View();
         }
+
+        public  JsonResult PullOrders()
+        {
+            Stores stores = new Stores();
+            stores.CheckAllOrders();
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
     }
 }

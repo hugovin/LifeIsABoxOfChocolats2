@@ -1,5 +1,4 @@
-﻿var upsDialog, encidiaDialog;
-
+﻿var ConfirmationDialog;
 $(document).ready(function () {
     initDialogs();
     bindButtonsActions();
@@ -7,23 +6,20 @@ $(document).ready(function () {
 
 function bindButtonsActions() {
     $("#btnUps").bind('click', function () {
-        UpsEOD();
+        AllEOD();
     });
-    $("#btnEncidia").bind('click', function () {
-        EncidiaEOD();
-    }); 
 }
 
-function UpsEOD() {
+function AllEOD() {
     $.ajax({
         type: 'POST',
-        url: '/EOD/RunUpsEod',
+        url: '/EOD/RunOrdersEod',
         cache: false,
         data: {
         },
         dataType: "json",
         success: function (data) {
-            upsDialog.dialog("open");
+            ConfirmationDialog.dialog("open");
         },
         error: function (data) {
 
@@ -31,45 +27,14 @@ function UpsEOD() {
     });
 }
 
-
-
-function EncidiaEOD() {
-    $.ajax({
-        type: 'POST',
-        url: '/EOD/RunEncidiaEod',
-        cache: false,
-        data: {
-        },
-        dataType: "json",
-        success: function (data) {
-            encidiaDialog.dialog("open");
-        },
-        error: function (data) {
-
-        }
-    });
-}
 
 function initDialogs() {
-    upsDialog = $('#ups_dialog').dialog({
+    ConfirmationDialog = $('#confirmation_dialog').dialog({
         modal: true,
         autoOpen: false,
         resizable: false,
         draggable: false,
-        buttons: {
-            'ok': {
-                text: 'Ok',
-                click: function () {
-                    $(this).dialog("close");
-                }
-            }
-        }
-    });
-    encidiaDialog = $('#Encidia_dialog').dialog({
-        modal: true,
-        autoOpen: false,
-        resizable: false,
-        draggable: false,
+        width:550,    
         buttons: {
             'ok': {
                 text: 'Ok',

@@ -8,6 +8,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderStatusData", "OrderStatusData\OrderStatusData.csproj", "{61E212FD-9A8A-4013-A4D1-FE3F4501E337}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderStatusWeb", "OrderStatusWeb\OrderStatusWeb.csproj", "{295F812E-A9B0-4EEC-9500-49C4CF6D7A9E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{77C061ED-7A8F-4B45-924A-67CBCC90E37C} = {77C061ED-7A8F-4B45-924A-67CBCC90E37C}
+	EndProjectSection
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "OrderStatusServiceSetup", "OrderStatusServiceSetup\OrderStatusServiceSetup.vdproj", "{37680904-AE35-4D23-BE87-03644776BED9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +64,12 @@ Global
 		{295F812E-A9B0-4EEC-9500-49C4CF6D7A9E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{295F812E-A9B0-4EEC-9500-49C4CF6D7A9E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{295F812E-A9B0-4EEC-9500-49C4CF6D7A9E}.Release|x86.ActiveCfg = Release|Any CPU
+		{37680904-AE35-4D23-BE87-03644776BED9}.Debug|Any CPU.ActiveCfg = Debug
+		{37680904-AE35-4D23-BE87-03644776BED9}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{37680904-AE35-4D23-BE87-03644776BED9}.Debug|x86.ActiveCfg = Debug
+		{37680904-AE35-4D23-BE87-03644776BED9}.Release|Any CPU.ActiveCfg = Release
+		{37680904-AE35-4D23-BE87-03644776BED9}.Release|Mixed Platforms.ActiveCfg = Release
+		{37680904-AE35-4D23-BE87-03644776BED9}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

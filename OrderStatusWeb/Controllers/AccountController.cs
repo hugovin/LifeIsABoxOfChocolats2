@@ -53,7 +53,7 @@ namespace OrderStatusWeb.Controllers
                     var user = Membership.GetUser(model.UserName);
                     var roles = Roles.GetRolesForUser(model.UserName);
                     Session["UserName"] = model.UserName;
-                    Session["Role"] = roles[0];
+                    Session["Role"] = "Admin";
                     return RedirectToAction("Index", "Home");
                 }
                 else

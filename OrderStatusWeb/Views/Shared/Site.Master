@@ -22,7 +22,7 @@
         <div id="page-top">
             <!-- start logo -->
             <div id="logo">
-                <a href="">
+                <a href="/Home/Index">
                     <img src="../../css/images/shared/logo.png" width="259" height="40" alt="" /></a>
             </div>
             <!-- end logo -->
@@ -84,11 +84,24 @@
             <div class="nav">
                 <div class="table">
                     <ul class="select">
+                        <li><a href="#nogo"><b>Home</b><!--[if IE 7]><!--></a><!--<![endif]-->
+                            <!--[if lte IE 6]><table><tr><td><![endif]-->
+                            <div class="select_sub show">
+                                <ul class="sub">
+                                    <li><a href="/Home/Index">Pull Orders</a></li>
+                                </ul>
+                            </div>
+                            <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+                        </li>
+                    </ul>
+                                           <div class="nav-divider">
+                        &nbsp;</div>
+                    <ul class="select">
                         <li><a href="#nogo"><b>EOD</b><!--[if IE 7]><!--></a><!--<![endif]-->
                             <!--[if lte IE 6]><table><tr><td><![endif]-->
                             <div class="select_sub show">
                                 <ul class="sub">
-                                    <li><a href="../EOD/Index">End Of Day</a></li>
+                                    <li><a href="/EOD/Index">End Of Day</a></li>
                                 </ul>
                             </div>
                             <!--[if lte IE 6]></td></tr></table></a><![endif]-->
@@ -103,8 +116,8 @@
                             <!--[if lte IE 6]><table><tr><td><![endif]-->
                             <div class="select_sub show">
                                 <ul class="sub">
-                                    <li><a href="../Store/Index">View all Stores</a></li>
-                                    <li ><a href="../Store/AddStore">Add Store</a></li>
+                                    <li><a href="/Store/Index">View all Stores</a></li>
+                                    <li ><a href="/Store/AddStore">Add Store</a></li>
                                 </ul>
                             </div>
                             <!--[if lte IE 6]></td></tr></table></a><![endif]-->

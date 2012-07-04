@@ -1815,3 +1815,8 @@ span:hover.icon-2 {
 .checkboxDummy {
     
 }
+
+.divPullOrders{ float: left;}
+.divPullOrdersLabel{ float: left;padding-top: 8px;margin-right: 31px;font-weight: bold;}
+.divPullOrdersButton { float: left;}
+.eodTh{width: 205px !important}

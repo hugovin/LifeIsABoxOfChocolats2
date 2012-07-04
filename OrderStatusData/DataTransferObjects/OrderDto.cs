@@ -39,9 +39,7 @@ namespace OrderStatusData.DataTransferObjects
         [DataMember]
         public int EmailFlag { get; set; }
         [DataMember]
-        public string UpsService { get; set; }
-        [DataMember]
-        public string UspsService { get; set; }
+        public string UpsUspsService { get; set; }
         [DataMember]
         public string TrackingCode { get; set; }
         [DataMember]
@@ -70,8 +68,7 @@ namespace OrderStatusData.DataTransferObjects
             Phone = "";
             Email = "";
             EmailFlag = 0;
-            UpsService = null;
-            UspsService = null;
+  
             TrackingCode = null;
         }
     }

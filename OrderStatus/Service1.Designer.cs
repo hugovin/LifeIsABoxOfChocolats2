@@ -31,6 +31,10 @@
             this.Logs = new System.Diagnostics.EventLog();
             ((System.ComponentModel.ISupportInitialize)(this.Logs)).BeginInit();
             // 
+            // Logs
+            // 
+            this.Logs.EntryWritten += new System.Diagnostics.EntryWrittenEventHandler(this.Logs_EntryWritten);
+            // 
             // OrderStatusService
             // 
             this.ServiceName = "OrderStatusService";

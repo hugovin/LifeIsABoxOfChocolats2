@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.ServiceProcess;
+using System.Threading;
 using System.Text;
 
 
@@ -30,12 +31,20 @@ namespace OrderStatus
 
         protected override void OnStart(string[] args)
         {
-            Logs.WriteEntry("Started at:" + DateTime.UtcNow.ToString());
+            Logs.WriteEntry("Order status Started at:" + DateTime.UtcNow.ToString());
+            OrderStatusCheck orders = new OrderStatusCheck();
+            orders.CheckOrders();
+            
         }
 
         protected override void OnStop()
         {
-            Logs.WriteEntry("Stopped at:" + DateTime.UtcNow.ToString());
+            Logs.WriteEntry("Order status Stopped at:" + DateTime.UtcNow.ToString());
+        }
+
+        private void Logs_EntryWritten(object sender, EntryWrittenEventArgs e)
+        {
+
         }
 
     }

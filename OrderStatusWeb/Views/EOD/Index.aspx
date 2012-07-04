@@ -10,21 +10,11 @@
 
 <table border="0" cellpadding="0" cellspacing="0" id="id-form">
         <tr>
-            <th valign="top">
-                Run UPS end of day Process:
+            <th valign="top" class="eodTh">
+                Run end of day Process:
             </th>
             <td>
                 <input type="button" id="btnUps" value="" class="form-submit" />
-            </td>
-            <td>
-            </td>
-        </tr>
-                <tr>
-            <th valign="top">
-                Run Encidia end of day Process:
-            </th>
-            <td>
-                <input type="button" id="btnEncidia" value="" class="form-submit" />
             </td>
             <td>
             </td>
@@ -44,10 +34,7 @@
 </asp:Content>
 
 <asp:Content ID="Content5" ContentPlaceHolderID="CustomDialogs" runat="server">
-    <div id="ups_dialog" title="UPS EOD completed">
-        <p>UPS end of day process has been completed successfully</p>
-    </div>
-    <div id="Encidia_dialog" title="Encidia EOD completed">
-        <p>Encidia end of day process has been completed successfully</p>
+    <div id="confirmation_dialog" title="EOD completed">
+        <p>End of day process has been completed successfully</p>
     </div>
 </asp:Content>
