@@ -88,6 +88,7 @@
     </Compile>
     <Compile Include="HtmlHelpers\UrlHelperExtension.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\HomeModels.cs" />
     <Compile Include="Models\OrderModels.cs" />
     <Compile Include="Models\StoreModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

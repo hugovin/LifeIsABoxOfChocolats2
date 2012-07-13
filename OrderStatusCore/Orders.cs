@@ -120,47 +120,70 @@ namespace OrderStatusCore
                     orderDto.Phone = (ship.Phone != null) ? ship.Phone.ToString() : "";
                     orderDto.TrackingCode = (ship.TrackingCode != null) ? ship.TrackingCode.ToString() : "";
                     string method = (ship.Method != null) ? ship.Method.ToString() : "";
-                    if (!method.Equals(""))
+                    if (!orderDto.InvoiceNumber.Equals("") && !orderDto.InvoiceNumber.Equals("0"))
                     {
-                        if (method.Contains("UPS"))
+                        if (!method.Equals(""))
                         {
-                            orderDto.UpsUspsService = method.Replace("UPS -","");
-                            carrierType = CarrierType.Ups;
-                        }
-                        else
-                        {
-                            var upsResult = GetAllUpsServices().SingleOrDefault(s => s.Contains(method));
-                            if (!string.IsNullOrEmpty(upsResult))
+                            if (method.Contains("UPS"))
                             {
-                                orderDto.UpsUspsService = method.Replace("UPS -", "");
+                                orderDto.UpsUspsService = method.Replace("UPS -", "").Trim();
                                 carrierType = CarrierType.Ups;
                             }
                             else
                             {
-                                if (method.Contains("USPS"))
+                                string upsResult = "";
+                                try
                                 {
-                                    orderDto.UpsUspsService = method;
-                                    carrierType = CarrierType.Usps;
+                                    upsResult = GetAllUpsServices().SingleOrDefault(s => s.Contains(method)).Trim();
+                                }
+                                catch (Exception)
+                                {
+                                    upsResult = "";
+                                }
+                                if (!string.IsNullOrEmpty(upsResult))
+                                {
+                                    orderDto.UpsUspsService = method.Replace("UPS -", "");
+                                    carrierType = CarrierType.Ups;
                                 }
                                 else
                                 {
-                                    var uspsResult = GetAllUspsServices().SingleOrDefault(s => s.Contains(method));
-                                    if (!string.IsNullOrEmpty(uspsResult))
+                                    if (method.Contains("USPS"))
                                     {
-
                                         orderDto.UpsUspsService = method;
                                         carrierType = CarrierType.Usps;
+                                    }
+                                    else
+                                    {
+                                        string uspsResult = "";
+                                        try
+                                        {
+                                            uspsResult = GetAllUspsServices().SingleOrDefault(s => s.Contains(method));
+                                        }
+                                        catch (Exception)
+                                        {
 
+                                            uspsResult = "";
+                                        }
+                                        if (!string.IsNullOrEmpty(uspsResult))
+                                        {
+
+                                            orderDto.UpsUspsService = method;
+                                            carrierType = CarrierType.Usps;
+
+                                        }
+                                        else
+                                        {
+                                            orderDto.UpsUspsService = "Ground";
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
-                    else
-                    {
-                        orderDto.UpsUspsService = "Ground";
-                    }
-                    order newOrder = new order
+                        else
+                        {
+                            orderDto.UpsUspsService = "Ground";
+                        }
+                        order newOrder = new order
                                              {
                                                  address = orderDto.Address,
                                                  address2 = orderDto.Address2,
@@ -181,10 +204,12 @@ namespace OrderStatusCore
                                                  ups_service = orderDto.UpsUspsService,
                                                  state = orderDto.State
                                              };
-                    context.orders.AddObject(newOrder);
-                    context.SaveChanges();
-                    ordersRepositoryDbMethods.InsertOrderDataToRepository(orderDto);
+                        context.orders.AddObject(newOrder);
+                        context.SaveChanges();
+                        ordersRepositoryDbMethods.InsertOrderDataToRepository(orderDto);
+                    }
                 }
+
             }
             catch (InvalidOperationException exc)
             {

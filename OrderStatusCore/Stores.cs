@@ -66,6 +66,47 @@ namespace OrderStatusCore
             return listOfStores;
         }
 
+        public string CheckForAnOrder(int storeId, string invoice)
+        {
+            if (CheckIfOrderExist(invoice))
+            {
+                return "Invoice "+invoice+ " is already on the records";
+            }
+            cartAPI api = new cartAPI();
+            var store = GetStoreById(storeId);
+            XDocument xdoc = XDocument.Parse(api.getOrder(store.Url, store.ApiKey, 100, 1, false,invoice, "", "", "", "").OuterXml);
+            if (!xdoc.Root.Name.LocalName.Equals("Error"))
+            {
+                var OrderInformation = from x in xdoc.Descendants("Order")
+                                       select new
+                                       {
+                                           //---OrderInformation 
+                                           OrderID = x.Descendants("OrderID").First().Value,
+                                           Total = x.Descendants("Total").First().Value,
+                                           InvoiceNumber = x.Descendants("InvoiceNumber").First().Value,
+                                           CustomerID = x.Descendants("CustomerID").First().Value,
+                                           OrderStatus = x.Descendants("OrderStatus").First().Value,
+                                           DateStarted = x.Descendants("DateStarted").First().Value,
+                                           LastUpdate = x.Descendants("LastUpdate").First().Value,
+                                           OrderComment = x.Descendants("Comments").Descendants("OrderComment").First().Value,
+                                           OrderIntComment = x.Descendants("Comments").Descendants("OrderInternalComment").First().Value,
+                                           OrderExtComment = x.Descendants("Comments").Descendants("OrderExternalComment").First().Value,
+                                           Shippinginfo = x.Descendants("ShippingInformation").Descendants("Shipment"),
+                                           ItemInfo = x.Descendants("ShippingInformation").Descendants("OrderItems").Descendants("Item"),
+                                           Email = x.Descendants("BillingAddress").Descendants("Email").First().Value
+
+                                       };
+                var result = orders.CreateOrdersFromStore(OrderInformation, store.Id);
+                
+                 return "Invoice "+invoice+ " has been added succesfully";
+            }
+            else
+            {
+                return "Invoice "+invoice+ " was not found in the selected store. Try another store";
+            }
+            
+        }
+
         public void CheckAllOrders()
         {
             
@@ -105,10 +146,8 @@ namespace OrderStatusCore
                                                        Email = x.Descendants("BillingAddress").Descendants("Email").First().Value
 
                                                    };
-                            if (orders.CreateOrdersFromStore(OrderInformation, st.Id))
-                            {
-                                UpdateStoreLastRun(st.Id);
-                            }
+                            var result = orders.CreateOrdersFromStore(OrderInformation, st.Id);
+                            UpdateStoreLastRun(st.Id);
                         }
                        
                     }
@@ -792,6 +831,47 @@ namespace OrderStatusCore
 
             return ordersStatus;
         }
-      
+
+        public bool CheckIfOrderExist(string invoiceNumber)
+        {
+            orderstatusEntities data = new orderstatusEntities();
+            try
+            {
+
+                var order = data.orders.Where(x => x.invoice_number == invoiceNumber).SingleOrDefault();
+                if (order != null)
+                {
+                    return true;
+                }
+                
+            }
+            catch (InvalidOperationException exc)
+            {
+                return false;
+            }
+            catch (ArgumentNullException exc)
+            {
+                return false;
+            }
+            catch (NullReferenceException exc)
+            {
+                return false;
+            }
+            catch (OptimisticConcurrencyException exc)
+            {
+                return false;
+            }
+            catch (UpdateException exc)
+            {
+                return false;
+            }
+            finally
+            {
+                data.Dispose();
+            }
+            return false;
+
+        }
+
     }
 }
