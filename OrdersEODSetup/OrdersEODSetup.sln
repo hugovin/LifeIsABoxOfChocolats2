@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "OrdersEODProcess", "OrdersEODSetup.vdproj", "{E12BD161-42BF-4840-9A42-D7A1BE3547F2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E12BD161-42BF-4840-9A42-D7A1BE3547F2}.Debug|Default.ActiveCfg = Debug
+		{E12BD161-42BF-4840-9A42-D7A1BE3547F2}.Debug|Default.Build.0 = Debug
+		{E12BD161-42BF-4840-9A42-D7A1BE3547F2}.Release|Default.ActiveCfg = Release
+		{E12BD161-42BF-4840-9A42-D7A1BE3547F2}.Release|Default.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

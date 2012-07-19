@@ -147,10 +147,11 @@ namespace OrderStatusCore
 
                                                    };
                             var result = orders.CreateOrdersFromStore(OrderInformation, st.Id);
-                            UpdateStoreLastRun(st.Id);
+                           
                         }
                        
                     }
+                    UpdateStoreLastRun(st.Id);
 
                 }
             }
@@ -682,14 +683,19 @@ namespace OrderStatusCore
             var context = new orderstatusEntities();
             try
             {
+                string customStatus = "";
                 var orderStatus =
                     context.order_status_by_store.Where(
-                        x => x.storeid == storeId && x.is_valid == 1 && x.order_status_values.isPublic == 0).
-                        SingleOrDefault();
-                if (orderStatus != null)
+                        x => x.storeid == storeId && x.is_valid == 1 && x.order_status_values.isPublic == 0).ToList();
+                foreach (var status in orderStatus)
                 {
-                    return orderStatus.order_status_values.text;
+                    customStatus += status.order_status_values.text + ";";
                 }
+                if (customStatus.Length > 0)
+                {
+                    customStatus = customStatus.Remove(customStatus.Length - 1);
+                }
+                return customStatus;
 
             }
             catch (InvalidOperationException exc)

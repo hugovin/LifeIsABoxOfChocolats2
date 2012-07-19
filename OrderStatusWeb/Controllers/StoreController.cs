@@ -92,13 +92,17 @@ namespace OrderStatusWeb.Controllers
                 string customOrderStatus = "";
                 if (store.CustomOrderStatus != null && !store.CustomOrderStatus.Equals(""))
                 {
-                    customOrderStatus = _stores.AddCustomOrderStatus(store.CustomOrderStatus).ToString();
-                }
+                    string[] customStatuses = store.CustomOrderStatus.Split(';');
+                    foreach (var stat in customStatuses)
+                    {
+                        customOrderStatus = _stores.AddCustomOrderStatus(stat).ToString();
+                        if (!customOrderStatus.Equals(""))
+                        {
+                            orderStatusList.Add(customOrderStatus);
+                        }
+                        customOrderStatus = "";
+                    }
 
-
-                if (!customOrderStatus.Equals(""))
-                {
-                    orderStatusList.Add(customOrderStatus);
                 }
 
                 int storeId = _stores.AddStore(storeDto);
@@ -235,13 +239,16 @@ namespace OrderStatusWeb.Controllers
                 string customOrderStatus = "";
                 if (store.CustomOrderStatus != null && !store.CustomOrderStatus.Equals(""))
                 {
-                    customOrderStatus = _stores.AddCustomOrderStatus(store.CustomOrderStatus).ToString();
-                }
-
-
-                if (!customOrderStatus.Equals(""))
-                {
-                    orderStatusList.Add(customOrderStatus);
+                    string[] customStatuses = store.CustomOrderStatus.Split(';');
+                    foreach (var stat in customStatuses)
+                    {
+                        customOrderStatus = _stores.AddCustomOrderStatus(stat).ToString();
+                        if (!customOrderStatus.Equals(""))
+                        {
+                            orderStatusList.Add(customOrderStatus);
+                        }
+                        customOrderStatus = "";
+                    }
                 }
 
                 int storeId = _stores.EditStore(storeDto);

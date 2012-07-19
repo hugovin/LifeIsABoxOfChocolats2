@@ -29,7 +29,9 @@
         private void InitializeComponent()
         {
             this.Logs = new System.Diagnostics.EventLog();
+            this.eventLog1 = new System.Diagnostics.EventLog();
             ((System.ComponentModel.ISupportInitialize)(this.Logs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).BeginInit();
             // 
             // Logs
             // 
@@ -39,11 +41,13 @@
             // 
             this.ServiceName = "OrderStatusService";
             ((System.ComponentModel.ISupportInitialize)(this.Logs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).EndInit();
 
         }
 
         #endregion
 
         private System.Diagnostics.EventLog Logs;
+        private System.Diagnostics.EventLog eventLog1;
     }
 }

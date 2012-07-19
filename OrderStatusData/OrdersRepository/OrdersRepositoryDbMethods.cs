@@ -134,12 +134,25 @@ namespace OrderStatusData.UPS
                 {
                     while (reader.Read())
                     {
-                        OrderDto dto = new OrderDto
-                                           {
-                                               InvoiceNumber = reader.GetString(1),
-                                               TrackingCode = reader.GetString(2)
-                                           };
-                        listOfOrders.Add(dto);
+                        try
+                        {
+                            if (reader.GetString(1) != null && !String.IsNullOrEmpty(reader.GetString(1)))
+                            {
+                                OrderDto dto = new OrderDto
+                                {
+                                    InvoiceNumber = reader.GetString(1),
+                                    TrackingCode = reader.GetString(2)
+                                };
+                                listOfOrders.Add(dto);
+                            }
+
+                        }
+                        catch (Exception)
+                        {
+                           //
+                        }
+                       
+
                     }
                     reader.Close();
                 }
@@ -172,6 +185,45 @@ namespace OrderStatusData.UPS
         }
 
         public bool CleanOrderDataToRepository()
+        {
+            OleDbConnection conn = new OleDbConnection();
+            try
+            {
+                conn = connection.GetOrdersRepositoryConnection();
+                OleDbCommand cmd = new OleDbCommand();
+                conn.Open();
+                cmd.Connection = conn;
+
+                cmd.CommandText = "INSERT INTO ConsolidateEOD (OrderId, TrackingNumber,Weight,TotalCharges,TotalShippedCharges) SELECT * FROM MyEODShipment";
+                cmd.ExecuteNonQuery();
+
+                conn.Close();
+                return DeleteOrderDataToRepository();
+            }
+            catch (InvalidOperationException exc)
+            {
+                AccessConnectionHandler.log.Error(exc);
+                return false;
+            }
+            catch (ArgumentNullException exc)
+            {
+                AccessConnectionHandler.log.Error(exc);
+                return false;
+            }
+            catch (OleDbException exc)
+            {
+                AccessConnectionHandler.log.Error(exc);
+                return false;
+            }
+            finally
+            {
+                // Close the connection
+                if (conn.State == ConnectionState.Open)
+                    conn.Close();
+            }
+        }
+
+        public bool DeleteOrderDataToRepository()
         {
             OleDbConnection conn = new OleDbConnection();
             try
