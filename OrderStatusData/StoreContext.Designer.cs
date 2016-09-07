@@ -8,12 +8,13 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
+using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Data.EntityClient;
-using System.ComponentModel;
-using System.Xml.Serialization;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
@@ -140,6 +141,54 @@ namespace OrderStatusData
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<my_aspnet_paths> my_aspnet_paths
+        {
+            get
+            {
+                if ((_my_aspnet_paths == null))
+                {
+                    _my_aspnet_paths = base.CreateObjectSet<my_aspnet_paths>("my_aspnet_paths");
+                }
+                return _my_aspnet_paths;
+            }
+        }
+        private ObjectSet<my_aspnet_paths> _my_aspnet_paths;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<my_aspnet_personalizationallusers> my_aspnet_personalizationallusers
+        {
+            get
+            {
+                if ((_my_aspnet_personalizationallusers == null))
+                {
+                    _my_aspnet_personalizationallusers = base.CreateObjectSet<my_aspnet_personalizationallusers>("my_aspnet_personalizationallusers");
+                }
+                return _my_aspnet_personalizationallusers;
+            }
+        }
+        private ObjectSet<my_aspnet_personalizationallusers> _my_aspnet_personalizationallusers;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<my_aspnet_personalizationperuser> my_aspnet_personalizationperuser
+        {
+            get
+            {
+                if ((_my_aspnet_personalizationperuser == null))
+                {
+                    _my_aspnet_personalizationperuser = base.CreateObjectSet<my_aspnet_personalizationperuser>("my_aspnet_personalizationperuser");
+                }
+                return _my_aspnet_personalizationperuser;
+            }
+        }
+        private ObjectSet<my_aspnet_personalizationperuser> _my_aspnet_personalizationperuser;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<my_aspnet_profiles> my_aspnet_profiles
         {
             get
@@ -200,6 +249,22 @@ namespace OrderStatusData
             }
         }
         private ObjectSet<my_aspnet_sessions> _my_aspnet_sessions;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<my_aspnet_sitemap> my_aspnet_sitemap
+        {
+            get
+            {
+                if ((_my_aspnet_sitemap == null))
+                {
+                    _my_aspnet_sitemap = base.CreateObjectSet<my_aspnet_sitemap>("my_aspnet_sitemap");
+                }
+                return _my_aspnet_sitemap;
+            }
+        }
+        private ObjectSet<my_aspnet_sitemap> _my_aspnet_sitemap;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -330,6 +395,7 @@ namespace OrderStatusData
         private ObjectSet<usps_service> _usps_service;
 
         #endregion
+
         #region AddTo Methods
     
         /// <summary>
@@ -365,6 +431,30 @@ namespace OrderStatusData
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the my_aspnet_paths EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTomy_aspnet_paths(my_aspnet_paths my_aspnet_paths)
+        {
+            base.AddObject("my_aspnet_paths", my_aspnet_paths);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the my_aspnet_personalizationallusers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTomy_aspnet_personalizationallusers(my_aspnet_personalizationallusers my_aspnet_personalizationallusers)
+        {
+            base.AddObject("my_aspnet_personalizationallusers", my_aspnet_personalizationallusers);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the my_aspnet_personalizationperuser EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTomy_aspnet_personalizationperuser(my_aspnet_personalizationperuser my_aspnet_personalizationperuser)
+        {
+            base.AddObject("my_aspnet_personalizationperuser", my_aspnet_personalizationperuser);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the my_aspnet_profiles EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddTomy_aspnet_profiles(my_aspnet_profiles my_aspnet_profiles)
@@ -394,6 +484,14 @@ namespace OrderStatusData
         public void AddTomy_aspnet_sessions(my_aspnet_sessions my_aspnet_sessions)
         {
             base.AddObject("my_aspnet_sessions", my_aspnet_sessions);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the my_aspnet_sitemap EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTomy_aspnet_sitemap(my_aspnet_sitemap my_aspnet_sitemap)
+        {
+            base.AddObject("my_aspnet_sitemap", my_aspnet_sitemap);
         }
     
         /// <summary>
@@ -461,11 +559,11 @@ namespace OrderStatusData
         }
 
         #endregion
+
     }
-    
 
     #endregion
-    
+
     #region Entities
     
     /// <summary>
@@ -490,6 +588,7 @@ namespace OrderStatusData
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -616,6 +715,7 @@ namespace OrderStatusData
         partial void OnisActiveChanged();
 
         #endregion
+
     
     }
     
@@ -643,6 +743,7 @@ namespace OrderStatusData
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -793,6 +894,7 @@ namespace OrderStatusData
         partial void OnisActiveChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -835,6 +937,7 @@ namespace OrderStatusData
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -859,6 +962,7 @@ namespace OrderStatusData
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -937,6 +1041,7 @@ namespace OrderStatusData
         partial void OndescriptionChanged();
 
         #endregion
+
     
     }
     
@@ -964,6 +1069,7 @@ namespace OrderStatusData
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1426,6 +1532,434 @@ namespace OrderStatusData
         partial void OnFailedPasswordAnswerAttemptWindowStartChanged();
 
         #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="orderstatusModel", Name="my_aspnet_paths")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class my_aspnet_paths : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new my_aspnet_paths object.
+        /// </summary>
+        /// <param name="applicationId">Initial value of the applicationId property.</param>
+        /// <param name="pathId">Initial value of the pathId property.</param>
+        /// <param name="path">Initial value of the path property.</param>
+        /// <param name="loweredPath">Initial value of the loweredPath property.</param>
+        public static my_aspnet_paths Createmy_aspnet_paths(global::System.Int32 applicationId, global::System.String pathId, global::System.String path, global::System.String loweredPath)
+        {
+            my_aspnet_paths my_aspnet_paths = new my_aspnet_paths();
+            my_aspnet_paths.applicationId = applicationId;
+            my_aspnet_paths.pathId = pathId;
+            my_aspnet_paths.path = path;
+            my_aspnet_paths.loweredPath = loweredPath;
+            return my_aspnet_paths;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 applicationId
+        {
+            get
+            {
+                return _applicationId;
+            }
+            set
+            {
+                OnapplicationIdChanging(value);
+                ReportPropertyChanging("applicationId");
+                _applicationId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("applicationId");
+                OnapplicationIdChanged();
+            }
+        }
+        private global::System.Int32 _applicationId;
+        partial void OnapplicationIdChanging(global::System.Int32 value);
+        partial void OnapplicationIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String pathId
+        {
+            get
+            {
+                return _pathId;
+            }
+            set
+            {
+                if (_pathId != value)
+                {
+                    OnpathIdChanging(value);
+                    ReportPropertyChanging("pathId");
+                    _pathId = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("pathId");
+                    OnpathIdChanged();
+                }
+            }
+        }
+        private global::System.String _pathId;
+        partial void OnpathIdChanging(global::System.String value);
+        partial void OnpathIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String path
+        {
+            get
+            {
+                return _path;
+            }
+            set
+            {
+                OnpathChanging(value);
+                ReportPropertyChanging("path");
+                _path = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("path");
+                OnpathChanged();
+            }
+        }
+        private global::System.String _path;
+        partial void OnpathChanging(global::System.String value);
+        partial void OnpathChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String loweredPath
+        {
+            get
+            {
+                return _loweredPath;
+            }
+            set
+            {
+                OnloweredPathChanging(value);
+                ReportPropertyChanging("loweredPath");
+                _loweredPath = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("loweredPath");
+                OnloweredPathChanged();
+            }
+        }
+        private global::System.String _loweredPath;
+        partial void OnloweredPathChanging(global::System.String value);
+        partial void OnloweredPathChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="orderstatusModel", Name="my_aspnet_personalizationallusers")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class my_aspnet_personalizationallusers : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new my_aspnet_personalizationallusers object.
+        /// </summary>
+        /// <param name="pathId">Initial value of the pathId property.</param>
+        /// <param name="pageSettings">Initial value of the pageSettings property.</param>
+        /// <param name="lastUpdatedDate">Initial value of the lastUpdatedDate property.</param>
+        public static my_aspnet_personalizationallusers Createmy_aspnet_personalizationallusers(global::System.String pathId, global::System.Byte[] pageSettings, global::System.DateTime lastUpdatedDate)
+        {
+            my_aspnet_personalizationallusers my_aspnet_personalizationallusers = new my_aspnet_personalizationallusers();
+            my_aspnet_personalizationallusers.pathId = pathId;
+            my_aspnet_personalizationallusers.pageSettings = pageSettings;
+            my_aspnet_personalizationallusers.lastUpdatedDate = lastUpdatedDate;
+            return my_aspnet_personalizationallusers;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String pathId
+        {
+            get
+            {
+                return _pathId;
+            }
+            set
+            {
+                if (_pathId != value)
+                {
+                    OnpathIdChanging(value);
+                    ReportPropertyChanging("pathId");
+                    _pathId = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("pathId");
+                    OnpathIdChanged();
+                }
+            }
+        }
+        private global::System.String _pathId;
+        partial void OnpathIdChanging(global::System.String value);
+        partial void OnpathIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Byte[] pageSettings
+        {
+            get
+            {
+                return StructuralObject.GetValidValue(_pageSettings);
+            }
+            set
+            {
+                OnpageSettingsChanging(value);
+                ReportPropertyChanging("pageSettings");
+                _pageSettings = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("pageSettings");
+                OnpageSettingsChanged();
+            }
+        }
+        private global::System.Byte[] _pageSettings;
+        partial void OnpageSettingsChanging(global::System.Byte[] value);
+        partial void OnpageSettingsChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime lastUpdatedDate
+        {
+            get
+            {
+                return _lastUpdatedDate;
+            }
+            set
+            {
+                OnlastUpdatedDateChanging(value);
+                ReportPropertyChanging("lastUpdatedDate");
+                _lastUpdatedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("lastUpdatedDate");
+                OnlastUpdatedDateChanged();
+            }
+        }
+        private global::System.DateTime _lastUpdatedDate;
+        partial void OnlastUpdatedDateChanging(global::System.DateTime value);
+        partial void OnlastUpdatedDateChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="orderstatusModel", Name="my_aspnet_personalizationperuser")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class my_aspnet_personalizationperuser : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new my_aspnet_personalizationperuser object.
+        /// </summary>
+        /// <param name="id">Initial value of the id property.</param>
+        /// <param name="applicationId">Initial value of the applicationId property.</param>
+        /// <param name="pageSettings">Initial value of the pageSettings property.</param>
+        /// <param name="lastUpdatedDate">Initial value of the lastUpdatedDate property.</param>
+        public static my_aspnet_personalizationperuser Createmy_aspnet_personalizationperuser(global::System.Int32 id, global::System.Int32 applicationId, global::System.Byte[] pageSettings, global::System.DateTime lastUpdatedDate)
+        {
+            my_aspnet_personalizationperuser my_aspnet_personalizationperuser = new my_aspnet_personalizationperuser();
+            my_aspnet_personalizationperuser.id = id;
+            my_aspnet_personalizationperuser.applicationId = applicationId;
+            my_aspnet_personalizationperuser.pageSettings = pageSettings;
+            my_aspnet_personalizationperuser.lastUpdatedDate = lastUpdatedDate;
+            return my_aspnet_personalizationperuser;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (_id != value)
+                {
+                    OnidChanging(value);
+                    ReportPropertyChanging("id");
+                    _id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("id");
+                    OnidChanged();
+                }
+            }
+        }
+        private global::System.Int32 _id;
+        partial void OnidChanging(global::System.Int32 value);
+        partial void OnidChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 applicationId
+        {
+            get
+            {
+                return _applicationId;
+            }
+            set
+            {
+                OnapplicationIdChanging(value);
+                ReportPropertyChanging("applicationId");
+                _applicationId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("applicationId");
+                OnapplicationIdChanged();
+            }
+        }
+        private global::System.Int32 _applicationId;
+        partial void OnapplicationIdChanging(global::System.Int32 value);
+        partial void OnapplicationIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String pathId
+        {
+            get
+            {
+                return _pathId;
+            }
+            set
+            {
+                OnpathIdChanging(value);
+                ReportPropertyChanging("pathId");
+                _pathId = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("pathId");
+                OnpathIdChanged();
+            }
+        }
+        private global::System.String _pathId;
+        partial void OnpathIdChanging(global::System.String value);
+        partial void OnpathIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> userId
+        {
+            get
+            {
+                return _userId;
+            }
+            set
+            {
+                OnuserIdChanging(value);
+                ReportPropertyChanging("userId");
+                _userId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("userId");
+                OnuserIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _userId;
+        partial void OnuserIdChanging(Nullable<global::System.Int32> value);
+        partial void OnuserIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Byte[] pageSettings
+        {
+            get
+            {
+                return StructuralObject.GetValidValue(_pageSettings);
+            }
+            set
+            {
+                OnpageSettingsChanging(value);
+                ReportPropertyChanging("pageSettings");
+                _pageSettings = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("pageSettings");
+                OnpageSettingsChanged();
+            }
+        }
+        private global::System.Byte[] _pageSettings;
+        partial void OnpageSettingsChanging(global::System.Byte[] value);
+        partial void OnpageSettingsChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime lastUpdatedDate
+        {
+            get
+            {
+                return _lastUpdatedDate;
+            }
+            set
+            {
+                OnlastUpdatedDateChanging(value);
+                ReportPropertyChanging("lastUpdatedDate");
+                _lastUpdatedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("lastUpdatedDate");
+                OnlastUpdatedDateChanged();
+            }
+        }
+        private global::System.DateTime _lastUpdatedDate;
+        partial void OnlastUpdatedDateChanging(global::System.DateTime value);
+        partial void OnlastUpdatedDateChanged();
+
+        #endregion
+
     
     }
     
@@ -1453,6 +1987,7 @@ namespace OrderStatusData
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1579,6 +2114,7 @@ namespace OrderStatusData
         partial void OnlastUpdatedDateChanged();
 
         #endregion
+
     
     }
     
@@ -1608,6 +2144,7 @@ namespace OrderStatusData
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1686,6 +2223,7 @@ namespace OrderStatusData
         partial void OnnameChanged();
 
         #endregion
+
     
     }
     
@@ -1704,21 +2242,24 @@ namespace OrderStatusData
         /// </summary>
         /// <param name="lastRun">Initial value of the LastRun property.</param>
         /// <param name="intervalMinutes">Initial value of the IntervalMinutes property.</param>
-        public static my_aspnet_sessioncleanup Createmy_aspnet_sessioncleanup(global::System.DateTime lastRun, global::System.Int32 intervalMinutes)
+        /// <param name="applicationId">Initial value of the ApplicationId property.</param>
+        public static my_aspnet_sessioncleanup Createmy_aspnet_sessioncleanup(global::System.DateTime lastRun, global::System.Int32 intervalMinutes, global::System.Int32 applicationId)
         {
             my_aspnet_sessioncleanup my_aspnet_sessioncleanup = new my_aspnet_sessioncleanup();
             my_aspnet_sessioncleanup.LastRun = lastRun;
             my_aspnet_sessioncleanup.IntervalMinutes = intervalMinutes;
+            my_aspnet_sessioncleanup.ApplicationId = applicationId;
             return my_aspnet_sessioncleanup;
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.DateTime LastRun
         {
@@ -1728,14 +2269,11 @@ namespace OrderStatusData
             }
             set
             {
-                if (_LastRun != value)
-                {
-                    OnLastRunChanging(value);
-                    ReportPropertyChanging("LastRun");
-                    _LastRun = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("LastRun");
-                    OnLastRunChanged();
-                }
+                OnLastRunChanging(value);
+                ReportPropertyChanging("LastRun");
+                _LastRun = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LastRun");
+                OnLastRunChanged();
             }
         }
         private global::System.DateTime _LastRun;
@@ -1745,7 +2283,7 @@ namespace OrderStatusData
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Int32 IntervalMinutes
         {
@@ -1755,21 +2293,46 @@ namespace OrderStatusData
             }
             set
             {
-                if (_IntervalMinutes != value)
-                {
-                    OnIntervalMinutesChanging(value);
-                    ReportPropertyChanging("IntervalMinutes");
-                    _IntervalMinutes = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("IntervalMinutes");
-                    OnIntervalMinutesChanged();
-                }
+                OnIntervalMinutesChanging(value);
+                ReportPropertyChanging("IntervalMinutes");
+                _IntervalMinutes = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IntervalMinutes");
+                OnIntervalMinutesChanged();
             }
         }
         private global::System.Int32 _IntervalMinutes;
         partial void OnIntervalMinutesChanging(global::System.Int32 value);
         partial void OnIntervalMinutesChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ApplicationId
+        {
+            get
+            {
+                return _ApplicationId;
+            }
+            set
+            {
+                if (_ApplicationId != value)
+                {
+                    OnApplicationIdChanging(value);
+                    ReportPropertyChanging("ApplicationId");
+                    _ApplicationId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ApplicationId");
+                    OnApplicationIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ApplicationId;
+        partial void OnApplicationIdChanging(global::System.Int32 value);
+        partial void OnApplicationIdChanged();
 
         #endregion
+
     
     }
     
@@ -1811,6 +2374,7 @@ namespace OrderStatusData
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2060,6 +2624,184 @@ namespace OrderStatusData
         partial void OnFlagsChanged();
 
         #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="orderstatusModel", Name="my_aspnet_sitemap")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class my_aspnet_sitemap : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new my_aspnet_sitemap object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        public static my_aspnet_sitemap Createmy_aspnet_sitemap(global::System.Int32 id)
+        {
+            my_aspnet_sitemap my_aspnet_sitemap = new my_aspnet_sitemap();
+            my_aspnet_sitemap.Id = id;
+            return my_aspnet_sitemap;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Title
+        {
+            get
+            {
+                return _Title;
+            }
+            set
+            {
+                OnTitleChanging(value);
+                ReportPropertyChanging("Title");
+                _Title = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Title");
+                OnTitleChanged();
+            }
+        }
+        private global::System.String _Title;
+        partial void OnTitleChanging(global::System.String value);
+        partial void OnTitleChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
+            }
+        }
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Url
+        {
+            get
+            {
+                return _Url;
+            }
+            set
+            {
+                OnUrlChanging(value);
+                ReportPropertyChanging("Url");
+                _Url = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Url");
+                OnUrlChanged();
+            }
+        }
+        private global::System.String _Url;
+        partial void OnUrlChanging(global::System.String value);
+        partial void OnUrlChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Roles
+        {
+            get
+            {
+                return _Roles;
+            }
+            set
+            {
+                OnRolesChanging(value);
+                ReportPropertyChanging("Roles");
+                _Roles = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Roles");
+                OnRolesChanged();
+            }
+        }
+        private global::System.String _Roles;
+        partial void OnRolesChanging(global::System.String value);
+        partial void OnRolesChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ParentId
+        {
+            get
+            {
+                return _ParentId;
+            }
+            set
+            {
+                OnParentIdChanging(value);
+                ReportPropertyChanging("ParentId");
+                _ParentId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ParentId");
+                OnParentIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ParentId;
+        partial void OnParentIdChanging(Nullable<global::System.Int32> value);
+        partial void OnParentIdChanged();
+
+        #endregion
+
     
     }
     
@@ -2091,6 +2833,7 @@ namespace OrderStatusData
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2217,6 +2960,7 @@ namespace OrderStatusData
         partial void OnlastActivityDateChanged();
 
         #endregion
+
     
     }
     
@@ -2244,6 +2988,7 @@ namespace OrderStatusData
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2301,6 +3046,7 @@ namespace OrderStatusData
         partial void OnroleIdChanged();
 
         #endregion
+
     
     }
     
@@ -2326,6 +3072,7 @@ namespace OrderStatusData
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2836,6 +3583,7 @@ namespace OrderStatusData
         partial void Ondate_modifedChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -2878,6 +3626,7 @@ namespace OrderStatusData
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -2906,6 +3655,7 @@ namespace OrderStatusData
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -3056,6 +3806,7 @@ namespace OrderStatusData
         partial void Onis_validChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -3136,6 +3887,7 @@ namespace OrderStatusData
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -3160,6 +3912,7 @@ namespace OrderStatusData
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -3310,6 +4063,7 @@ namespace OrderStatusData
         partial void OnisActiveChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -3336,6 +4090,7 @@ namespace OrderStatusData
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -3366,6 +4121,7 @@ namespace OrderStatusData
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -3612,6 +4368,7 @@ namespace OrderStatusData
         partial void OnisActiveChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -3682,6 +4439,7 @@ namespace OrderStatusData
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -3706,6 +4464,7 @@ namespace OrderStatusData
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -3760,6 +4519,7 @@ namespace OrderStatusData
         partial void OnserviceChanged();
 
         #endregion
+
     
     }
     
@@ -3785,6 +4545,7 @@ namespace OrderStatusData
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -3839,9 +4600,11 @@ namespace OrderStatusData
         partial void OnserviceChanged();
 
         #endregion
+
     
     }
 
     #endregion
+
     
 }

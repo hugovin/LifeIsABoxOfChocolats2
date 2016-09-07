@@ -51,7 +51,7 @@ namespace OrderStatusWeb.Controllers
 
                     FormsService.SignIn(model.UserName, model.RememberMe);
                     var user = Membership.GetUser(model.UserName);
-                    var roles = Roles.GetRolesForUser(model.UserName);
+                    
                     Session["UserName"] = model.UserName;
                     Session["Role"] = "Admin";
                     return RedirectToAction("Index", "Home");

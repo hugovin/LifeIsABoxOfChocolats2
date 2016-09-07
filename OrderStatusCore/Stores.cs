@@ -21,10 +21,10 @@ namespace OrderStatusCore
         private Orders orders = new Orders();
         public List<StoreDto> GetAllStores()
         {
-            orderstatusEntities data = new orderstatusEntities();
+            var data = new orderstatusEntities();
             List<StoreDto> listOfStores = new List<StoreDto>();
-            try { 
-
+            try {
+                var ts = "";
                 var stores = data.stores_data.Where(x=> x.isActive == 1).ToList();
                 foreach (var store in stores)
                 {
