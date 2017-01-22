@@ -13,11 +13,13 @@ using System.Data;
 using System.Xml;
 
 using Newtonsoft.Json;
+using NLog;
 
 namespace OrderStatusCore
 {
     public class Stores
     {
+        public static readonly Logger log = LogManager.GetCurrentClassLogger();
         private Orders orders = new Orders();
         public List<StoreDto> GetAllStores()
         {
@@ -41,22 +43,27 @@ namespace OrderStatusCore
             }
             catch (InvalidOperationException exc)
             {
+                log.Error("Error InvalidOperationException: " + exc.Message);
                 return null;
             }
             catch (ArgumentNullException exc)
             {
+                log.Error("Error ArgumentNullException: " + exc.Message);
                 return null;
             }
             catch (NullReferenceException exc)
             {
+                log.Error("Error NullReferenceException: " + exc.Message);
                 return null;
             }
             catch (OptimisticConcurrencyException exc)
             {
+                log.Error("Error OptimisticConcurrencyException: " + exc.Message);
                 return null;
             }
             catch (UpdateException exc)
             {
+                log.Error("Error UpdateException: " + exc.Message);
                 return null;
             }
             finally
@@ -222,8 +229,8 @@ namespace OrderStatusCore
             }
             catch (Exception ex)
             {
+                log.Error("Error Exception: " + ex.Message);
                 return false;
-                throw;
             }
             finally
             {
@@ -255,7 +262,7 @@ namespace OrderStatusCore
             }
             catch (Exception ex)
             {
-                return dto;
+                log.Error("Error Exception GetStoreById: " + ex.Message);
                 throw;
             }
             finally
@@ -276,6 +283,7 @@ namespace OrderStatusCore
             }
             catch (Exception ex)
             {
+                log.Error("Error Exception UpdateStoreLastRun: " + ex.Message);
                 throw;
             }
             finally
@@ -304,22 +312,27 @@ namespace OrderStatusCore
             }
             catch (InvalidOperationException exc)
             {
+                log.Error("Error InvalidOperationException GetPublicOrdersStatus: " + exc.Message);
                 return null;
             }
             catch (ArgumentNullException exc)
             {
+                log.Error("Error ArgumentNullException GetPublicOrdersStatus: " + exc.Message);
                 return null;
             }
             catch (NullReferenceException exc)
             {
+                log.Error("Error NullReferenceException GetPublicOrdersStatus: " + exc.Message);
                 return null;
             }
             catch (OptimisticConcurrencyException exc)
             {
+                log.Error("Error OptimisticConcurrencyException GetPublicOrdersStatus: " + exc.Message);
                 return null;
             }
             catch (UpdateException exc)
             {
+                log.Error("Error UpdateException GetPublicOrdersStatus: " + exc.Message);
                 return null;
             }
             finally
@@ -347,25 +360,30 @@ namespace OrderStatusCore
             catch (InvalidOperationException exc)
             {
                 AccessConnectionHandler.log.Error(exc);
+                log.Error("Error InvalidOperationException AddCustomOrderStatus: " + exc.Message);
                 return 0;
             }
             catch (ArgumentNullException exc)
             {
                 AccessConnectionHandler.log.Error(exc);
+                log.Error("Error ArgumentNullException AddCustomOrderStatus: " + exc.Message);
                 return 0;
             }
             catch (NullReferenceException exc)
             {
                 AccessConnectionHandler.log.Error(exc);
+                log.Error("Error NullReferenceException AddCustomOrderStatus: " + exc.Message);
                 return 0;
             }
             catch (OptimisticConcurrencyException exc)
             {
                 AccessConnectionHandler.log.Error(exc);
+                log.Error("Error OptimisticConcurrencyException AddCustomOrderStatus: " + exc.Message);
                 return 0;
             }
             catch (UpdateException exc)
             {
+                log.Error("Error UpdateException AddCustomOrderStatus: " + exc.Message);
                 AccessConnectionHandler.log.Error(exc);
                 return 0;
             }
@@ -436,18 +454,22 @@ namespace OrderStatusCore
             }
             catch (InvalidOperationException exc)
             {
+                log.Error("Error InvalidOperationException CreateCustomShipments: " + exc.Message);
                 AccessConnectionHandler.log.Error(exc);
             }
             catch (ArgumentNullException exc)
             {
+                log.Error("Error ArgumentNullException CreateCustomShipments: " + exc.Message);
                 AccessConnectionHandler.log.Error(exc);
             }
             catch (NullReferenceException exc)
             {
+                log.Error("Error NullReferenceException CreateCustomShipments: " + exc.Message);
                 AccessConnectionHandler.log.Error(exc);
             }
             catch (OptimisticConcurrencyException exc)
             {
+                log.Error("Error OptimisticConcurrencyException CreateCustomShipments: " + exc.Message);
                 AccessConnectionHandler.log.Error(exc);
             }
             catch (UpdateException exc)
@@ -477,22 +499,27 @@ namespace OrderStatusCore
             }
             catch (InvalidOperationException exc)
             {
+                log.Error("Error InvalidOperationException GetCustomShipmentByStoreId: " + exc.Message);
                 AccessConnectionHandler.log.Error(exc);
             }
             catch (ArgumentNullException exc)
             {
+                log.Error("Error ArgumentNullException GetCustomShipmentByStoreId: " + exc.Message);
                 AccessConnectionHandler.log.Error(exc);
             }
             catch (NullReferenceException exc)
             {
+                log.Error("Error NullReferenceException GetCustomShipmentByStoreId: " + exc.Message);
                 AccessConnectionHandler.log.Error(exc);
             }
             catch (OptimisticConcurrencyException exc)
             {
+                log.Error("Error OptimisticConcurrencyException GetCustomShipmentByStoreId: " + exc.Message);
                 AccessConnectionHandler.log.Error(exc);
             }
             catch (UpdateException exc)
             {
+                log.Error("Error UpdateException GetCustomShipmentByStoreId: " + exc.Message);
                 AccessConnectionHandler.log.Error(exc);
             }
             finally
@@ -521,22 +548,27 @@ namespace OrderStatusCore
             }
             catch (InvalidOperationException exc)
             {
+                log.Error("Error InvalidOperationException GetAllOrderStatusById: " + exc.Message);
                 AccessConnectionHandler.log.Error(exc);
             }
             catch (ArgumentNullException exc)
             {
+                log.Error("Error ArgumentNullException GetAllOrderStatusById: " + exc.Message);
                 AccessConnectionHandler.log.Error(exc);
             }
             catch (NullReferenceException exc)
             {
+                log.Error("Error NullReferenceException GetAllOrderStatusById: " + exc.Message);
                 AccessConnectionHandler.log.Error(exc);
             }
             catch (OptimisticConcurrencyException exc)
             {
+                log.Error("Error OptimisticConcurrencyException GetAllOrderStatusById: " + exc.Message);
                 AccessConnectionHandler.log.Error(exc);
             }
             catch (UpdateException exc)
             {
+                log.Error("Error: " + exc.Message +" locations"+ exc.TargetSite) ;
                 AccessConnectionHandler.log.Error(exc);
             }
             finally
@@ -560,22 +592,27 @@ namespace OrderStatusCore
             }
             catch (InvalidOperationException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
             }
             catch (ArgumentNullException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
             }
             catch (NullReferenceException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
             }
             catch (OptimisticConcurrencyException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
             }
             catch (UpdateException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
             }
             finally
@@ -605,26 +642,31 @@ namespace OrderStatusCore
             }
             catch (InvalidOperationException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
                 return false;
             }
             catch (ArgumentNullException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
                 return false;
             }
             catch (NullReferenceException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
                 return false;
             }
             catch (OptimisticConcurrencyException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
                 return false;
             }
             catch (UpdateException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
                 return false;
             }
@@ -652,22 +694,27 @@ namespace OrderStatusCore
             }
             catch (InvalidOperationException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
             }
             catch (ArgumentNullException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
             }
             catch (NullReferenceException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
             }
             catch (OptimisticConcurrencyException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
             }
             catch (UpdateException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
             }
             finally
@@ -761,26 +808,31 @@ namespace OrderStatusCore
             }
             catch (InvalidOperationException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
                 return 0;
             }
             catch (ArgumentNullException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
                 return 0;
             }
             catch (NullReferenceException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
                 return 0;
             }
             catch (OptimisticConcurrencyException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
                 return 0;
             }
             catch (UpdateException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
                 return 0;
             }
@@ -808,25 +860,30 @@ namespace OrderStatusCore
             }
             catch (InvalidOperationException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
 
             }
             catch (ArgumentNullException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
-          }
+            }
             catch (NullReferenceException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
 
             }
             catch (OptimisticConcurrencyException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
 
             }
             catch (UpdateException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 AccessConnectionHandler.log.Error(exc);
 
             }
@@ -853,22 +910,27 @@ namespace OrderStatusCore
             }
             catch (InvalidOperationException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 return false;
             }
             catch (ArgumentNullException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 return false;
             }
             catch (NullReferenceException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 return false;
             }
             catch (OptimisticConcurrencyException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 return false;
             }
             catch (UpdateException exc)
             {
+                log.Error("Error: " + exc.Message + " locations" + exc.TargetSite);
                 return false;
             }
             finally

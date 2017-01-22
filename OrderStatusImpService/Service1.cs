@@ -58,5 +58,10 @@ namespace OrderStatusImpService
                     Thread.Sleep(3600000);
             }
         }
+
+        private void eventLog1_EntryWritten(object sender, System.Diagnostics.EntryWrittenEventArgs e)
+        {
+
+        }
     }
 }

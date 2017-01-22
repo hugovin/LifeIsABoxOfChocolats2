@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using OrderStatusData;
@@ -8,11 +9,13 @@ using OrderStatusData.DataTransferObjects;
 using OrderStatusData.UPS;
 using OrderStatusCore.DataType;
 using OrderStatusCore.API_3dCart;
+using NLog;
 
 namespace OrderStatusCore
 {
     public class Orders
     {
+        public static readonly Logger log = LogManager.GetCurrentClassLogger();
         public bool CreateOrdersFromStore(dynamic data,int storeId)
         {
             var context = new orderstatusEntities();
@@ -370,24 +373,34 @@ namespace OrderStatusCore
             try
             {
 
-                var order = context.orders.Where(x => x.invoice_number == invoiceNumber).SingleOrDefault();
+                var order = context.orders.Where(x => x.invoice_number == invoiceNumber).OrderByDescending(x=> x.date_created).FirstOrDefault();
                 if (order != null)
                 {
-                    var store = context.stores_data.Where(x => x.id == order.storeId).SingleOrDefault();
+                    var store = context.stores_data.FirstOrDefault(x => x.id == order.storeId);
                     if (store != null)
                     {
                         cartAPI api = new cartAPI();
-                        var result = api.updateOrderShipment(store.url, store.api_key,order.invoice_number,"",
-                                                     trackingNumber, DateTime.Now.ToShortDateString(), "");
-                        if (result.InnerText.Equals("OK"))
+                        var results = api.getOrderStatus(store.url, store.api_key, order.invoice_number, "");
+                        if(results != null && results.ChildNodes[2] != null && !results.ChildNodes[2].InnerText.ToString().Equals("Shipped") && !results.ChildNodes[2].InnerText.ToString().Equals("Complete"))
                         {
-                            var resultStatus = api.updateOrderStatus(store.url, store.api_key, order.invoice_number, "Shipped", "");
-                            var asr = resultStatus;
-                        }
+                            var result = api.updateOrderShipment(store.url, store.api_key, order.invoice_number, "",
+                                                     trackingNumber, DateTime.Now.ToShortDateString(), "");
+                            
+                            if (result.InnerText.Equals("OK"))
+                            {
+                                var resultStatus = api.updateOrderStatus(store.url, store.api_key, order.invoice_number, "Shipped", "");
+                                using (StreamWriter writer =  File.AppendText("C:\\Users\\hugo\\Desktop\\OrderStatusConsole\\Log.txt"))
+                                {
+                                    writer.WriteLine("Order Invoice: " + order.invoice_number + " updated from " + results.ChildNodes[2].InnerText.ToString() + " to Shipped");
+                                }
+                                
+                                var asr = resultStatus;
+                            }
+                        }                        
                     }
                     order.tracking_code = trackingNumber;
                     order.date_modifed = DateTime.Now;
-
+                    context.SaveChanges();
                 }
 
                 return true;
@@ -395,22 +408,27 @@ namespace OrderStatusCore
             }
             catch (InvalidOperationException exc)
             {
+                log.Error("Error UpdateOrderByInvoice: " + exc.InnerException.Message);
                 return false;
             }
             catch (ArgumentNullException exc)
             {
+                log.Error("Error UpdateOrderByInvoice: " + exc.InnerException.Message);
                 return false;
             }
             catch (NullReferenceException exc)
             {
+                log.Error("Error UpdateOrderByInvoice: " + exc.InnerException.Message);
                 return false;
             }
             catch (OptimisticConcurrencyException exc)
             {
+                log.Error("Error UpdateOrderByInvoice: " + exc.InnerException.Message);
                 return false;
             }
             catch (UpdateException exc)
             {
+                log.Error("Error UpdateOrderByInvoice: " + exc.InnerException.Message);
                 return false;
             }
             finally

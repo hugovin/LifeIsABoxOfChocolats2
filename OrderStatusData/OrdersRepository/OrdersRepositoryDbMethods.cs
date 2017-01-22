@@ -304,5 +304,48 @@ namespace OrderStatusData.UPS
                     conn.Close();
             }
         }
+
+        public bool RemoveOrderFromMyEODShipmentRepository(string invoice)
+        {
+            OleDbConnection conn = new OleDbConnection();
+            try
+            {
+
+                conn = connection.GetOrdersRepositoryConnection();
+                OleDbCommand cmd = new OleDbCommand();
+                conn.Open();
+                cmd.Connection = conn;
+
+                cmd.CommandText =
+                    "DELETE FROM MyEODShipment WHERE Orderid = @id";
+
+                cmd.Parameters.Add("@id", OleDbType.VarChar).Value = invoice;
+                cmd.ExecuteNonQuery();
+
+                conn.Close();
+                return true;
+            }
+            catch (InvalidOperationException exc)
+            {
+                AccessConnectionHandler.log.Error(exc);
+                return false;
+            }
+            catch (ArgumentNullException exc)
+            {
+                AccessConnectionHandler.log.Error(exc);
+                return false;
+            }
+            catch (OleDbException exc)
+            {
+                AccessConnectionHandler.log.Error(exc);
+                return false;
+            }
+            finally
+            {
+                // Close the connection
+                if (conn.State == ConnectionState.Open)
+                    conn.Close();
+            }
+        }
     }
 }
