@@ -129,33 +129,42 @@ namespace OrderStatusCore
                     List<string> OrderStatuses = GetAllOrderStatusTextByStore(st.Id);
                     foreach (var orderStatuse in OrderStatuses)
                     {
-                        string lastRun = String.Format("{0:MM/dd/yyyy}", st.LastRun);
-                        //string status = GetOrderStatusText(st.OrderStatus);
-                        XDocument xdoc = XDocument.Parse(api.getOrder(st.Url, st.ApiKey, 100, 1, false, "", orderStatuse, lastRun, "", "").OuterXml);
-                        if (!xdoc.Root.Name.LocalName.Equals("Error"))
+                        try
                         {
-                            var OrderInformation = from x in xdoc.Descendants("Order")
-                                                   select new
-                                                   {
-                                                       //---OrderInformation 
-                                                       OrderID = x.Descendants("OrderID").First().Value,
-                                                       Total = x.Descendants("Total").First().Value,
-                                                       InvoiceNumber = x.Descendants("InvoiceNumber").First().Value,
-                                                       CustomerID = x.Descendants("CustomerID").First().Value,
-                                                       OrderStatus = x.Descendants("OrderStatus").First().Value,
-                                                       DateStarted = x.Descendants("DateStarted").First().Value,
-                                                       LastUpdate = x.Descendants("LastUpdate").First().Value,
-                                                       OrderComment = x.Descendants("Comments").Descendants("OrderComment").First().Value,
-                                                       OrderIntComment = x.Descendants("Comments").Descendants("OrderInternalComment").First().Value,
-                                                       OrderExtComment = x.Descendants("Comments").Descendants("OrderExternalComment").First().Value,
-                                                       Shippinginfo = x.Descendants("ShippingInformation").Descendants("Shipment"),
-                                                       ItemInfo = x.Descendants("ShippingInformation").Descendants("OrderItems").Descendants("Item"),
-                                                       Email = x.Descendants("BillingAddress").Descendants("Email").First().Value
+                            string lastRun = String.Format("{0:MM/dd/yyyy}", st.LastRun);
+                            //string status = GetOrderStatusText(st.OrderStatus);
+                            XDocument xdoc = XDocument.Parse(api.getOrder(st.Url, st.ApiKey, 100, 1, false, "", orderStatuse, lastRun, "", "").OuterXml);
+                            if (!xdoc.Root.Name.LocalName.Equals("Error"))
+                            {
+                                var OrderInformation = from x in xdoc.Descendants("Order")
+                                                       select new
+                                                       {
+                                                           //---OrderInformation 
+                                                           OrderID = x.Descendants("OrderID").First().Value,
+                                                           Total = x.Descendants("Total").First().Value,
+                                                           InvoiceNumber = x.Descendants("InvoiceNumber").First().Value,
+                                                           CustomerID = x.Descendants("CustomerID").First().Value,
+                                                           OrderStatus = x.Descendants("OrderStatus").First().Value,
+                                                           DateStarted = x.Descendants("DateStarted").First().Value,
+                                                           LastUpdate = x.Descendants("LastUpdate").First().Value,
+                                                           OrderComment = x.Descendants("Comments").Descendants("OrderComment").First().Value,
+                                                           OrderIntComment = x.Descendants("Comments").Descendants("OrderInternalComment").First().Value,
+                                                           OrderExtComment = x.Descendants("Comments").Descendants("OrderExternalComment").First().Value,
+                                                           Shippinginfo = x.Descendants("ShippingInformation").Descendants("Shipment"),
+                                                           ItemInfo = x.Descendants("ShippingInformation").Descendants("OrderItems").Descendants("Item"),
+                                                           Email = x.Descendants("BillingAddress").Descendants("Email").First().Value
 
-                                                   };
-                            var result = orders.CreateOrdersFromStore(OrderInformation, st.Id);
-                           
+                                                       };
+                                var result = orders.CreateOrdersFromStore(OrderInformation, st.Id);
+
+                            }
                         }
+                        catch (Exception ex)
+                        {
+
+                            Console.WriteLine("Error Getting Store: "+st.Name+" Error:"+ex.Message+" at: " + DateTime.Now);
+                        }
+                        
                        
                     }
                     UpdateStoreLastRun(st.Id);

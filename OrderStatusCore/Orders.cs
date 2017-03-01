@@ -10,6 +10,7 @@ using OrderStatusData.UPS;
 using OrderStatusCore.DataType;
 using OrderStatusCore.API_3dCart;
 using NLog;
+using System.Configuration;
 
 namespace OrderStatusCore
 {
@@ -389,7 +390,7 @@ namespace OrderStatusCore
                             if (result.InnerText.Equals("OK"))
                             {
                                 var resultStatus = api.updateOrderStatus(store.url, store.api_key, order.invoice_number, "Shipped", "");
-                                using (StreamWriter writer =  File.AppendText("C:\\Users\\hugo\\Desktop\\OrderStatusConsole\\Log.txt"))
+                                using (StreamWriter writer =  File.AppendText(ConfigurationManager.AppSettings["logPathFile"]))
                                 {
                                     writer.WriteLine("Order Invoice: " + order.invoice_number + " updated from " + results.ChildNodes[2].InnerText.ToString() + " to Shipped");
                                 }
